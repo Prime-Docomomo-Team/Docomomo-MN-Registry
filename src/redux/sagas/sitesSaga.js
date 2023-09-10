@@ -30,9 +30,24 @@ function* fetchFilteredSites(action) {
   }
 }
 
+function* fetchSitesColumns() {
+  try {
+    const response = yield fetch("/api/sites/columns");
+    if (!response.ok) {
+      throw new Error("Network response was not OK");
+    }
+    const sitesColumns = yield response.json();
+
+    yield put({ type: "SET_SITES_COLUMNS", payload: sitesColumns });
+  } catch (error) {
+    console.log("Sites columns get request failed", error);
+  }
+}
+
 function* sitesSaga() {
   yield takeLatest("FETCH_ALL_SITES", fetchAllSites);
   yield takeLatest("FETCH_FILTERED_SITES", fetchFilteredSites);
+  yield takeLatest("FETCH_SITES_COLUMNS", fetchSitesColumns);
 }
 
 export default sitesSaga;

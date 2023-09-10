@@ -43,6 +43,24 @@ router.get("/filtered", (req, res) => {
       res.sendStatus(500);
     });
 });
+/**
+ * GET all columns in sites table
+ */
+router.get("/columns", (req, res) => {
+  pool
+    .query(
+      `
+    SELECT *
+    FROM information_schema.columns
+    WHERE table_name   = 'sites';
+    `
+    )
+    .then((result) => res.send(result.rows))
+    .catch((error) => {
+      console.log(error);
+      res.sendStatus(500);
+    });
+});
 
 /**
  * POST route template
