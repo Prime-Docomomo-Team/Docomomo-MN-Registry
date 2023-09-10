@@ -23,10 +23,7 @@ router.get("/", (req, res) => {
 //   { field: "street", input: "penn" },
 // ];
 router.get("/filtered", (req, res) => {
-  const queryText = `
-  SELECT * FROM sites
-  WHERE $1;`;
-  const whereStatement = req.body
+  const whereStatement = JSON.parse(req.query.filters)
     .map(
       (filter) =>
         `${filter.input
@@ -35,9 +32,11 @@ router.get("/filtered", (req, res) => {
           .join(" AND ")} `
     )
     .join("AND ");
-  const queryArgs = [whereStatement];
+  const queryText = `
+  SELECT * FROM sites
+  WHERE ${whereStatement};`;
   pool
-    .query(queryText, queryArgs)
+    .query(queryText)
     .then((result) => res.send(result.rows))
     .catch((error) => {
       console.log(error);
