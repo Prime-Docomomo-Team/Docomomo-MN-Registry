@@ -16,9 +16,9 @@ function* fetchAllSites() {
 
 function* fetchFilteredSites(action) {
   try {
-    const response = yield fetch("/api/sites/filtered", {
-      body: action.payload,
-    });
+    const response = yield fetch(
+      `/api/sites/filtered?filters=${JSON.stringify(action.payload)}`
+    );
     if (!response.ok) {
       throw new Error("Network response was not OK");
     }
@@ -32,7 +32,7 @@ function* fetchFilteredSites(action) {
 
 function* sitesSaga() {
   yield takeLatest("FETCH_ALL_SITES", fetchAllSites);
-  yield takeLatest("FETCH_ALL_SITES", fetchFilteredSites);
+  yield takeLatest("FETCH_FILTERED_SITES", fetchFilteredSites);
 }
 
 export default sitesSaga;
