@@ -14,8 +14,25 @@ function* fetchAllSites() {
   }
 }
 
+function* fetchFilteredSites(action) {
+  try {
+    const response = yield fetch("/api/sites/filtered", {
+      body: action.payload,
+    });
+    if (!response.ok) {
+      throw new Error("Network response was not OK");
+    }
+    const filteredSites = yield response.json();
+
+    yield put({ type: "SET_SITES", payload: filteredSites });
+  } catch (error) {
+    console.log("Filtered sites get request failed", error);
+  }
+}
+
 function* sitesSaga() {
   yield takeLatest("FETCH_ALL_SITES", fetchAllSites);
+  yield takeLatest("FETCH_ALL_SITES", fetchFilteredSites);
 }
 
 export default sitesSaga;
