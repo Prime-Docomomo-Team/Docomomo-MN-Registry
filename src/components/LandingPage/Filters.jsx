@@ -1,27 +1,34 @@
 import { Button } from "@mui/material";
 import TextField from "@mui/material/TextField";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 const Filters = () => {
   const dispatch = useDispatch();
   const { sitesColumns } = useSelector((store) => store);
 
+  const [filterInputs, setFilterInputs] = useState({});
+
   useEffect(() => {
     dispatch({ type: "FETCH_SITES_COLUMNS" });
   }, []);
 
   const applyFilters = () => {
+    const payload = [];
+    for (const key in filterInputs) {
+      payload.push({ field: key, input: filterInputs[key] });
+    }
+    console.log("payload", payload);
     dispatch({
       type: "FETCH_FILTERED_SITES",
-      payload: [
-        { field: "architect", input: "williaM purdy" },
-        { field: "street", input: "penn" },
-      ],
+      payload,
     });
   };
 
-  console.log("sitesColumns", sitesColumns);
+  const clearFilters = () => {
+    setFilterInputs({});
+    dispatch({ type: "FETCH_ALL_SITES" });
+  };
 
   return (
     <div>
@@ -36,10 +43,21 @@ const Filters = () => {
           <TextField
             key={column.ordinal_position}
             label={column.column_name.replace("_", " ")}
+            value={filterInputs[column.column_name] || ""}
+            onChange={(event) =>
+              setFilterInputs({
+                ...filterInputs,
+                [[column.column_name]]: event.target.value,
+              })
+            }
           />
         ))}
-      <Button variant="contained">Apply Filters</Button>
-      <Button variant="outlined">Clear Filters</Button>
+      <Button variant="contained" onClick={applyFilters}>
+        Apply Filters
+      </Button>
+      <Button variant="outlined" onClick={clearFilters}>
+        Clear Filters
+      </Button>
     </div>
   );
 };

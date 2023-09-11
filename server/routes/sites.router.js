@@ -23,18 +23,22 @@ router.get("/", (req, res) => {
 //   { field: "street", input: "penn" },
 // ];
 router.get("/filtered", (req, res) => {
-  const whereStatement = JSON.parse(req.query.filters)
-    .map(
-      (filter) =>
-        `${filter.input
-          .split(" ")
-          .map((input) => `${filter.field} ILIKE '%${input}%'`)
-          .join(" AND ")} `
-    )
-    .join("AND ");
+  const whereStatement =
+    JSON.parse(req.query.filters).length > 0
+      ? "WHERE " +
+        JSON.parse(req.query.filters)
+          .map(
+            (filter) =>
+              `${filter.input
+                .split(" ")
+                .map((input) => `${filter.field} ILIKE '%${input}%'`)
+                .join(" AND ")} `
+          )
+          .join("AND ")
+      : "";
   const queryText = `
   SELECT * FROM sites
-  WHERE ${whereStatement};`;
+   ${whereStatement};`;
   pool
     .query(queryText)
     .then((result) => res.send(result.rows))
