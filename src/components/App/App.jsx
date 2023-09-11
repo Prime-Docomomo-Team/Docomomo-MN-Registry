@@ -21,6 +21,8 @@ import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import Details from '../Details/Details';
 
+import { ThemeProvider, createTheme } from "@mui/material/styles";
+
 import './App.css';
 
 function App() {
@@ -31,6 +33,21 @@ function App() {
   useEffect(() => {
     dispatch({ type: 'FETCH_USER' });
   }, [dispatch]);
+
+  //MUI theme
+  const theme = createTheme({
+    palette: {
+      primary: {
+        main: "#F8642F",
+      },
+      secondary: {
+        main: "#92D4EB",
+      },
+    },
+    typography: {
+      fontFamily: "Jost, sans-serif",
+    },
+  });
 
   return (
     <Router>
