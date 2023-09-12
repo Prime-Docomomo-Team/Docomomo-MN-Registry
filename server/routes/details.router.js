@@ -5,8 +5,15 @@ const router = express.Router();
 /**
  * GET route template
  */
-router.get('/', (req, res) => {
-  // GET route code here
+router.get('/:id', (req, res) => {
+  const queryText = `SELECT * FROM "sites" WHERE id = $1;`;
+  pool.query(queryText,[req.params.id]).then((result) => {
+    res.send(result.rows);
+  })
+  .catch((error) => {
+    console.log("Error completing SELECT sites query", error)
+    res.sendStatus(500);
+  })
 });
 
 /**
