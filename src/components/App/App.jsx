@@ -41,7 +41,9 @@ function App() {
         main: "#F8642F",
       },
       secondary: {
-        main: "#92D4EB",
+        main: "#D4D4D4",
+        light: "#F2F2F2",
+        dark: "#7B89996"
       },
     },
     typography: {

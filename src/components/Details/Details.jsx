@@ -11,7 +11,7 @@ const Details = () => {
     <Box
       sx={{
         padding: 2,
-        backgroundColor: "#D4D4D4",
+        backgroundColor: "#F2F2F2",
         width: "80%",
         margin: "auto",
       }}
