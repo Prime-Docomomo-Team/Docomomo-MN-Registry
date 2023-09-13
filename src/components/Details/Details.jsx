@@ -1,7 +1,6 @@
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { Box, Grid, Typography, Divider, Button } from "@mui/material";
-import TypeOverrides from "pg/lib/type-overrides";
+import { Box, Grid, Typography, Button, Divider } from "@mui/material";
 
 const Details = () => {
   const history = useHistory();
@@ -12,7 +11,7 @@ const Details = () => {
     <Box
       sx={{
         padding: 2,
-        backgroundColor: "#D4D4D4",
+        backgroundColor: "#F2F2F2",
         width: "80%",
         margin: "auto",
       }}
@@ -26,7 +25,7 @@ const Details = () => {
         <Grid item xs={12} sm={8} md={6} lg={5}>
           <Box
             component="img"
-            sx={{ borderRadius: 10 }}
+            sx={{ borderRadius: 5 }}
             src="https://www.creativeboom.com/uploads/articles/07/07ce01e00f639f2cb0423886f647bf19bb12c01e_1620.jpg"
             alt="This is a placeholder image"
           ></Box>
@@ -34,12 +33,14 @@ const Details = () => {
       </Grid>
       <Grid container padding={2} justifyContent="center">
         <Grid item>
-          <Typography component="h2" variant="h4">
-            Title of Site
+          <Typography component="h2" variant="h3" color='primary'>
+            Site Name
           </Typography>
+          <Divider role='presentation' sx={{margin: 2}}/>
+
         </Grid>
       </Grid>
-      <Grid container justifyContent="center" display="flex" gap={5}>
+      <Grid container justifyContent="space-evenly" display="flex" gap={5}>
         <Grid
           item
           justifyContent="center"
@@ -47,7 +48,7 @@ const Details = () => {
           flexDirection="column"
         >
           <Grid item>
-            <Typography component="p" sx={{ fontWeight: "bold" }}>
+            <Typography component="h5" variant='h5' sx={{ fontWeight: "bold" }} color='primary'>
               Address
             </Typography>
           </Grid>
@@ -62,7 +63,7 @@ const Details = () => {
           flexDirection="column"
         >
           <Grid item>
-            <Typography component="p" sx={{ fontWeight: "bold" }}>
+            <Typography component="h5" variant='h5' sx={{ fontWeight: "bold" }} color='primary'>
               Architect
             </Typography>
           </Grid>
@@ -77,7 +78,7 @@ const Details = () => {
           flexDirection="column"
         >
           <Grid item>
-            <Typography component="p" sx={{ fontWeight: "bold" }}>
+            <Typography component="h5" variant='h5' sx={{ fontWeight: "bold" }} color='primary'>
               Year Built
             </Typography>
           </Grid>
@@ -86,21 +87,21 @@ const Details = () => {
           </Grid>
         </Grid>
       </Grid>
+      <Divider sx={{margin: 5}} role='presentation'/>
       <Grid
         container
         display="flex"
         flexDirection="column"
-        padding={2}
         gap={2}
         alignItems="center"
       >
         <Grid item>
-          <Typography component="p" variant="p" sx={{ fontWeight: "bold" }}>
+          <Typography component="h5" variant='h5' sx={{ fontWeight: "bold" }} color='primary'>
             Description
           </Typography>
         </Grid>
-        <Grid item>
-          <Typography component="p" variant="p">
+        <Grid item padding={5} paddingTop={0}>
+          <Typography component="p" >
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. In non leo
             a lacus lacinia pulvinar id ut ligula. Cras bibendum tellus
             accumsan, venenatis massa id, posuere velit. Suspendisse auctor leo
