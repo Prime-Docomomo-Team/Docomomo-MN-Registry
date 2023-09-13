@@ -15,8 +15,14 @@ const Map = () => {
   console.log("api key", process.env.REACT_APP_GOOGLE_MAPS_API_KEY);
 
   return (
-    <GoogleMap zoom={6} center={center} mapContainerClassName="map-container">
-      Map
+    <GoogleMap 
+    zoom={6} 
+    center={center} mapContainerClassName="map-container">
+    <MarkerClusterer>
+      {(clusterer) => sites.map(site => <Marker key={site.id} 
+      position={{lat: site.latitude, lng: site.longitude}}
+      /> )}
+    </MarkerClusterer>
     </GoogleMap>
   );
 };
