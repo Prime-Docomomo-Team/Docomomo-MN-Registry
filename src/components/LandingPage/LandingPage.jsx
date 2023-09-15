@@ -12,7 +12,7 @@ function LandingPage() {
   const [heading, setHeading] = useState("Welcome");
   const history = useHistory();
   const { isLoaded } = useLoadScript({
-    googleMapsApiKey: process.env.AIzaSyA2mhiqPJm36ipnXDQOBzBxPcQKO-Q691c,
+    googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
   });
 
   const onLogin = (event) => {
