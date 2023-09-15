@@ -4,8 +4,8 @@ import { Box, Grid, Typography, Button, Divider } from "@mui/material";
 
 const Details = () => {
   const history = useHistory();
-  const siteDetails = useSelector((store) => store.details);
-  console.log(siteDetails);
+  const { id, street, city, state, zip, site_name, architect, year_built, description } = useSelector((store) => store.details);
+  console.log(street)
 
   return (
     <Box
@@ -18,7 +18,7 @@ const Details = () => {
     >
       <Grid container>
         <Grid item>
-          <Button onClick={() => history.goBack}>BACK</Button>
+          <Button onClick={() => history.push('/home')}>BACK</Button>
         </Grid>
       </Grid>
       <Grid container justifyContent="center">
@@ -34,7 +34,7 @@ const Details = () => {
       <Grid container padding={2} justifyContent="center">
         <Grid item>
           <Typography component="h2" variant="h3" color='primary'>
-            Site Name
+            {site_name}
           </Typography>
           <Divider role='presentation' sx={{margin: 2}}/>
 
@@ -53,7 +53,7 @@ const Details = () => {
             </Typography>
           </Grid>
           <Grid item>
-            <Typography>123 Main Street, Minneapolis, MN 55418</Typography>
+            <Typography>{street}, {city}, {state}, {zip}</Typography>
           </Grid>
         </Grid>
         <Grid
@@ -68,7 +68,7 @@ const Details = () => {
             </Typography>
           </Grid>
           <Grid item>
-            <Typography>Picasso</Typography>
+            <Typography>{architect}</Typography>
           </Grid>
         </Grid>
         <Grid
@@ -83,7 +83,7 @@ const Details = () => {
             </Typography>
           </Grid>
           <Grid item>
-            <Typography>1967</Typography>
+            <Typography>{year_built}</Typography>
           </Grid>
         </Grid>
       </Grid>
@@ -102,25 +102,7 @@ const Details = () => {
         </Grid>
         <Grid item padding={5} paddingTop={0}>
           <Typography component="p" >
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. In non leo
-            a lacus lacinia pulvinar id ut ligula. Cras bibendum tellus
-            accumsan, venenatis massa id, posuere velit. Suspendisse auctor leo
-            non justo elementum viverra. Etiam a convallis ipsum, non ultricies
-            ex. Integer ligula urna, feugiat lacinia purus posuere, tempor
-            finibus mauris. Nam sit amet aliquam felis. Nunc ultrices nec diam
-            quis malesuada. Suspendisse non metus diam. Ut feugiat, lacus sit
-            amet facilisis placerat, metus nulla vulputate nunc, et pretium
-            augue nunc vel odio. Pellentesque mollis quam ex, vel porttitor
-            nulla maximus et. Vestibulum quis accumsan sapien. Aliquam mattis
-            nunc aliquam hendrerit pulvinar. Aliquam ut accumsan erat. Aenean ac
-            est lacus. Nam neque urna, ullamcorper vel pellentesque sed,
-            ullamcorper eget ex. Vestibulum rutrum vel est eu sagittis. Etiam
-            elementum sagittis mauris et rhoncus. Vivamus auctor aliquet justo
-            sed faucibus. Donec id odio vel odio posuere rutrum. Maecenas
-            faucibus malesuada turpis fermentum sodales. Nam tincidunt neque
-            eget rhoncus posuere. Aenean tellus ligula, rutrum et volutpat
-            vitae, consectetur efficitur est. Cras a quam id ipsum elementum
-            pellentesque ut eu felis.
+            {description}
           </Typography>
         </Grid>
       </Grid>
