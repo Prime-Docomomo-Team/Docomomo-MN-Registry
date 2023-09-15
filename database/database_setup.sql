@@ -13,3 +13,11 @@ CREATE TABLE "sites" (
   "year_built" VARCHAR (80),
   "description" VARCHAR
 );
+
+CREATE TABLE "site_photos" (
+  "id" SERIAL PRIMARY KEY,
+  "name" VARCHAR(1000),
+  "url_id" VARCHAR(500),
+  "size" INT,
+  "sites_id" INT REFERENCES "sites"
+);
