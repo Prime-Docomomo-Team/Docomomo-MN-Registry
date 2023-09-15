@@ -5,7 +5,8 @@ import { Box, Grid, Typography, Button, Divider } from "@mui/material";
 const Details = () => {
   const history = useHistory();
   const { id, street, city, state, zip, site_name, architect, year_built, description } = useSelector((store) => store.details);
-  console.log(street)
+  const photos = useSelector(store => store.photos);
+  console.log(photos);
 
   return (
     <Box
