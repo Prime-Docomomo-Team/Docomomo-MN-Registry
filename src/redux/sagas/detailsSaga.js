@@ -6,10 +6,10 @@ function* fetchDetails(action){
         if (!response.ok) {
             throw new Error('Network response was not OK');
         }
-        const detail = yield response.json();
-        yield put({ type: 'SET_DETAILS', payload: detail });
+        const details = yield response.json();
+        yield put({ type: 'SET_DETAILS', payload: details[0] });
     }catch (error) {
-        console.log('user get request failed', error)
+        console.log('details get request failed', error)
     }
 
 }

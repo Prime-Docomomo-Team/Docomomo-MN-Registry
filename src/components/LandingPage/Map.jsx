@@ -30,6 +30,11 @@ const Map = () => {
     setActiveMarker(marker);
   };
 
+  const setDetails = (siteId) => {
+    dispatch({type: "FETCH_DETAILS", payload: siteId});
+    history.push('/details');
+  }
+
   console.log(sites);
   console.log("api key", process.env.REACT_APP_GOOGLE_MAPS_API_KEY);
 
@@ -55,9 +60,7 @@ const Map = () => {
                     <div>
                       <Typography>{site.site_name}</Typography>
                       <Button
-                        onClick={() => {
-                          history.push(`/details/${site.id}`);
-                        }}
+                        onClick={() => setDetails(site.id)}
                       >
                         Read More
                       </Button>
