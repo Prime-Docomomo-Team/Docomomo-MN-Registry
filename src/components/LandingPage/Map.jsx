@@ -32,7 +32,9 @@ const Map = () => {
 
   const setDetails = (siteId) => {
     dispatch({type: "FETCH_DETAILS", payload: siteId});
+    dispatch({type: "FETCH_PHOTOS", payload: siteId});
     history.push('/details');
+
   }
 
   console.log(sites);
