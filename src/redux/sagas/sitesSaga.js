@@ -1,7 +1,7 @@
 import { put, takeLatest } from "redux-saga/effects";
 
 function* fetchAllSites() {
-  yield put({ type: "SET_SITES", payload: [] });
+  // yield put({ type: "SET_SITES", payload: [] });
   try {
     const response = yield fetch("/api/sites");
     if (!response.ok) {
@@ -16,7 +16,7 @@ function* fetchAllSites() {
 }
 
 function* fetchFilteredSites(action) {
-  yield put({ type: "SET_SITES", payload: [] });
+  // yield put({ type: "SET_SITES", payload: [] });
   try {
     const response = yield fetch(
       `/api/sites/filtered?filters=${JSON.stringify(action.payload)}`

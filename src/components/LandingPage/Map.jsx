@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import {
@@ -17,11 +17,16 @@ const Map = () => {
   const { sites } = useSelector((store) => store);
   const [activeMarker, setActiveMarker] = useState(null);
   const center = useMemo(() => ({ lat: 46.7296, lng: -94.6859 }), []);
+  const clustererRef = useRef();
   console.log("Sites with photos: ", sites);
 
   useEffect(() => {
     dispatch({ type: "FETCH_ALL_SITES" });
   }, []);
+
+  useEffect(() => {
+    clustererRef.current?.repaint();
+  }, [sites.length]);
 
   const handleActiveMarker = (marker) => {
     if (marker === activeMarker) {
@@ -47,7 +52,10 @@ const Map = () => {
       onClick={() => setActiveMarker(null)}
     >
       {sites && sites.length > 0 && (
-        <MarkerClustererF onUnmount={(clusterer) => clusterer.clearMarkers()}>
+        <MarkerClustererF
+          onLoad={(clusterer) => (clustererRef.current = clusterer)}
+          // onUnmount={(clusterer) => clusterer.clearMarkers()}
+        >
           {(clusterer) =>
             sites.map((site) => (
               <MarkerF
@@ -55,6 +63,7 @@ const Map = () => {
                 position={{ lat: site.latitude, lng: site.longitude }}
                 onClick={() => handleActiveMarker(site.id)}
                 clusterer={clusterer}
+                noClustererRedraw={true}
               >
                 {activeMarker === site.id && (
                   <InfoWindowF onCloseClick={() => setActiveMarker(null)}>
