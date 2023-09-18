@@ -30,7 +30,14 @@ const Details = () => {
     >
       <Grid container>
         <Grid item>
-          <Button onClick={() => history.push("/home")}>BACK</Button>
+          <Button
+            onClick={() => {
+              history.push("/home");
+              window.location.reload();
+            }}
+          >
+            BACK
+          </Button>
         </Grid>
       </Grid>
       <Grid container justifyContent="center">
