@@ -1,4 +1,4 @@
-INSERT INTO "site_photos"("id","name","url_id","size","sites_id")
+INSERT INTO "site_photos"("photo_id","photo_name","url_id","size","sites_id")
 VALUES
 (1,E'MPLS-3rdAveS-1101-03.jpg',E'195paEOzP6l8BQh1MmQ2rKkKdRq3VZE1H',1144852,344),
 (2,E'MPLS-StevensAve-2501-09.jpg',E'1vnhHIsFX1phHIm3x95KwKpewIHQ37bLB',631142,7899),

@@ -15,8 +15,8 @@ CREATE TABLE "sites" (
 );
 
 CREATE TABLE "site_photos" (
-  "id" SERIAL PRIMARY KEY,
-  "name" VARCHAR(1000),
+  "photo_id" SERIAL PRIMARY KEY,
+  "photo_name" VARCHAR(1000),
   "url_id" VARCHAR(500),
   "size" INT,
   "sites_id" INT REFERENCES "sites"
