@@ -8,6 +8,10 @@ import RegisterForm from "../RegisterForm/RegisterForm";
 import Map from "./Map";
 import Filters from "./Filters";
 
+// MUI
+import CircularProgress from "@mui/material/CircularProgress";
+import Box from "@mui/material/Box";
+
 function LandingPage() {
   const [heading, setHeading] = useState("Welcome");
   const history = useHistory();
@@ -21,7 +25,20 @@ function LandingPage() {
 
   return (
     <div className="container">
-      {!isLoaded ? <div>Loading...</div> : <Map />}
+      {!isLoaded ? (
+        <Box
+          className="map-container"
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <CircularProgress />
+        </Box>
+      ) : (
+        <Map />
+      )}
       <Filters />
     </div>
   );
