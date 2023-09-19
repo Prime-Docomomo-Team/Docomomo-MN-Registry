@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState, useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import {
@@ -15,6 +15,7 @@ const Map = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const sites = useSelector((store) => store.sites);
+  const [map, setMap] = useState(null);
   const [activeMarker, setActiveMarker] = useState(null);
   const center = useMemo(() => ({ lat: 46.7296, lng: -94.6859 }), []);
   const clustererRef = useRef();
@@ -29,6 +30,21 @@ const Map = () => {
     clustererRef.current?.repaint();
   }, [sites]);
 
+  // For setting map bounds
+  useEffect(() => {
+    if (map) {
+      const bounds = new window.google.maps.LatLngBounds();
+      sites.map((marker) => {
+        bounds.extend({
+          lat: marker.latitude,
+          lng: marker.longitude,
+        });
+      });
+      map.fitBounds(bounds);
+    }
+  }, [map, sites]);
+  const onLoadMap = useCallback((map) => setMap(map), []);
+
   const handleActiveMarker = (marker) => {
     if (marker === activeMarker) {
       return;
@@ -41,8 +57,9 @@ const Map = () => {
 
   return (
     <GoogleMap
-      zoom={6}
-      center={center}
+      onLoad={onLoadMap}
+      // zoom={6}
+      // center={center}
       mapContainerClassName="map-container"
       onClick={() => setActiveMarker(null)}
     >
