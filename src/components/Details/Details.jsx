@@ -1,10 +1,13 @@
-import { useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { useHistory, useParams } from "react-router-dom";
 import { Box, Grid, Typography, Button, Divider } from "@mui/material";
 import ImageStepper from "./ImageStepper";
+import { useEffect } from "react";
 
 const Details = () => {
+  const dispatch = useDispatch();
   const history = useHistory();
+  const params = useParams();
   const {
     id,
     street,
@@ -18,6 +21,11 @@ const Details = () => {
   } = useSelector((store) => store.details);
   const photos = useSelector((store) => store.photos);
   console.log(photos);
+
+  useEffect(() => {
+    dispatch({ type: "FETCH_DETAILS", payload: params.id });
+    dispatch({ type: "FETCH_PHOTOS", payload: params.id });
+  }, []);
 
   return (
     <Box

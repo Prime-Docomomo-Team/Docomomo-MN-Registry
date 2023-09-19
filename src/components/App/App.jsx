@@ -43,7 +43,7 @@ function App() {
       secondary: {
         main: "#D4D4D4",
         light: "#F2F2F2",
-        dark: "#7B89996"
+        dark: "#7B89996",
       },
     },
     typography: {
@@ -121,7 +121,7 @@ function App() {
                 <LandingPage />
               )}
             </Route>
-            <Route exact path="/details">
+            <Route exact path="/details/:id">
               <Details />
             </Route>
 
