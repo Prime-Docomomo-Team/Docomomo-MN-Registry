@@ -26,7 +26,7 @@ const Map = () => {
 
   useEffect(() => {
     clustererRef.current?.repaint();
-  }, [sites.length]);
+  }, [sites]);
 
   const handleActiveMarker = (marker) => {
     if (marker === activeMarker) {

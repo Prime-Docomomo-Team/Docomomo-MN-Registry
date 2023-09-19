@@ -15,6 +15,7 @@ const Filters = () => {
 
   useEffect(() => {
     dispatch({ type: "FETCH_SITES_COLUMNS" });
+    applyFilters();
   }, []);
 
   const applyFilters = () => {

@@ -41,7 +41,7 @@ const Details = () => {
           <Button
             onClick={() => {
               history.push("/home");
-              window.location.reload();
+              dispatch({ type: "SET_SITES", payload: [] });
             }}
           >
             BACK
