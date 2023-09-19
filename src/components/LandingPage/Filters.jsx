@@ -9,9 +9,9 @@ import Container from "@mui/material/Container";
 
 const Filters = () => {
   const dispatch = useDispatch();
-  const { sitesColumns } = useSelector((store) => store);
+  const { sitesColumns, filterInputs } = useSelector((store) => store);
 
-  const [filterInputs, setFilterInputs] = useState({});
+  // const [filterInputs, setFilterInputs] = useState({});
 
   useEffect(() => {
     dispatch({ type: "FETCH_SITES_COLUMNS" });
@@ -31,7 +31,7 @@ const Filters = () => {
   };
 
   const clearFilters = () => {
-    setFilterInputs({});
+    dispatch({ type: "SET_FILTER_INPUTS", payload: {} });
     dispatch({ type: "FETCH_ALL_SITES" });
   };
 
@@ -53,9 +53,12 @@ const Filters = () => {
                 label={column.column_name.replace("_", " ")}
                 value={filterInputs[column.column_name] || ""}
                 onChange={(event) =>
-                  setFilterInputs({
-                    ...filterInputs,
-                    [[column.column_name]]: event.target.value,
+                  dispatch({
+                    type: "SET_FILTER_INPUTS",
+                    payload: {
+                      ...filterInputs,
+                      [[column.column_name]]: event.target.value,
+                    },
                   })
                 }
               />

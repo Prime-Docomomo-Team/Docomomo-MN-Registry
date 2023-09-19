@@ -14,15 +14,16 @@ import { Button, Box, Typography } from "@mui/material";
 const Map = () => {
   const dispatch = useDispatch();
   const history = useHistory();
-  const { sites } = useSelector((store) => store);
+  const sites = useSelector((store) => store.sites);
   const [activeMarker, setActiveMarker] = useState(null);
   const center = useMemo(() => ({ lat: 46.7296, lng: -94.6859 }), []);
   const clustererRef = useRef();
   console.log("Sites with photos: ", sites);
 
-  useEffect(() => {
-    dispatch({ type: "FETCH_ALL_SITES" });
-  }, []);
+  // No longer needed? Now that we are applying filters to load markers.
+  // useEffect(() => {
+  //   dispatch({ type: "FETCH_ALL_SITES" });
+  // }, []);
 
   useEffect(() => {
     clustererRef.current?.repaint();
@@ -82,7 +83,10 @@ const Map = () => {
                       )}
 
                       <Button
-                        onClick={() => history.push(`/details/${site.id}`)}
+                        onClick={() => {
+                          history.push(`/details/${site.id}`);
+                          dispatch({ type: "SET_SITES", payload: [] });
+                        }}
                       >
                         Read More
                       </Button>

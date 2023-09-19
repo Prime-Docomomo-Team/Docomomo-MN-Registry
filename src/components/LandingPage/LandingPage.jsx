@@ -39,7 +39,7 @@ function LandingPage() {
       ) : (
         <Map />
       )}
-      <Filters />
+      {isLoaded && <Filters />}
     </div>
   );
 }

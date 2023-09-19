@@ -4,7 +4,8 @@ import user from "./user.reducer";
 import details from "./detailsReducer";
 import sites from "./sitesReducer";
 import sitesColumns from "./sitesColumns.reducer";
-import photos from './photosReducer';
+import photos from "./photosReducer";
+import filterInputs from "./filterInputs.reducer";
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -19,7 +20,7 @@ const rootReducer = combineReducers({
   sites,
   sitesColumns,
   photos,
-
+  filterInputs,
 });
 
 export default rootReducer;
