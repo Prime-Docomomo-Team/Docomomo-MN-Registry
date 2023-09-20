@@ -36,6 +36,7 @@ const Details = () => {
         backgroundColor: "#F2F2F2",
         width: "80%",
         margin: "auto",
+        minHeight: '75vh'
       }}
     >
       <Grid container>
@@ -147,7 +148,7 @@ const Details = () => {
                 Description
               </Typography>
             </Grid>
-            <Grid item lg={9} sm={11} paddingTop={0} paddingBottom={5}>
+            <Grid item lg={9} sm={11} paddingTop={0} paddingBottom={5} sx={{textAlign: 'center'}}>
               <Typography component="p">{description}</Typography>
             </Grid>
           </Grid>
