@@ -79,12 +79,29 @@ function* editSite(action) {
   }
 }
 
+function* deleteSite(action) {
+  try {
+    const response = yield fetch(`/api/sites/${action.payload.id}`, {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+    });
+    if (!response.ok) {
+      throw new Error("Error Editing Sites");
+    }
+
+    yield put({ type: "FETCH_ALL_SITES" });
+  } catch (error) {
+    console.log("Sites DELETE request failed", error);
+  }
+}
+
 function* sitesSaga() {
   yield takeLatest("FETCH_ALL_SITES", fetchAllSites);
   yield takeLatest("FETCH_FILTERED_SITES", fetchFilteredSites);
   yield takeLatest("FETCH_SITES_COLUMNS", fetchSitesColumns);
   yield takeLatest("ADD_SITE", addSite);
   yield takeLatest("EDIT_SITE", editSite);
+  yield takeLatest("DELETE_SITE", deleteSite);
 }
 
 export default sitesSaga;
