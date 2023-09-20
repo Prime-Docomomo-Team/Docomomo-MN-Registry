@@ -6,6 +6,21 @@ import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Grid from "@mui/material/Grid";
 import Container from "@mui/material/Container";
+import MenuItem from "@mui/material/MenuItem";
+
+// States
+
+const states = [
+  { value: "mn", label: "Minnesota" },
+  { value: "nd", label: "North Dakota" },
+  { value: "sd", label: "South Dakota" },
+  { value: "ia", label: "Iowa" },
+  { value: "wi", label: "Wisconsin" },
+  { value: "il", label: "Illinois" },
+  { value: "mo", label: "Missouri" },
+  { value: "in", label: "Indiana" },
+  { value: "", label: "clear filter" },
+];
 
 const Filters = () => {
   const dispatch = useDispatch();
@@ -45,25 +60,57 @@ const Filters = () => {
                 column.column_name
               )
           )
-          .map((column) => (
-            <Grid item xs={3}>
-              <TextField
-                variant="standard"
-                key={column.ordinal_position}
-                label={column.column_name.replace("_", " ")}
-                value={filterInputs[column.column_name] || ""}
-                onChange={(event) =>
-                  dispatch({
-                    type: "SET_FILTER_INPUTS",
-                    payload: {
-                      ...filterInputs,
-                      [[column.column_name]]: event.target.value,
-                    },
-                  })
-                }
-              />
-            </Grid>
-          ))}
+          .map((column) => {
+            if (column.column_name === "state") {
+              return (
+                <Grid item xs={3}>
+                  <TextField
+                    fullWidth
+                    variant="standard"
+                    select
+                    key={column.ordinal_position}
+                    label={column.column_name.replace("_", " ")}
+                    displayEmpty
+                    // defaultValue={filterInputs[column.column_name] || ""}
+                    onChange={(event) =>
+                      dispatch({
+                        type: "SET_FILTER_INPUTS",
+                        payload: {
+                          ...filterInputs,
+                          [[column.column_name]]: event.target.value,
+                        },
+                      })
+                    }
+                  >
+                    {states.map((option) => (
+                      <MenuItem key={option.value} value={option.value}>
+                        {option.label}
+                      </MenuItem>
+                    ))}
+                  </TextField>
+                </Grid>
+              );
+            }
+            return (
+              <Grid item xs={3}>
+                <TextField
+                  variant="standard"
+                  key={column.ordinal_position}
+                  label={column.column_name.replace("_", " ")}
+                  value={filterInputs[column.column_name] || ""}
+                  onChange={(event) =>
+                    dispatch({
+                      type: "SET_FILTER_INPUTS",
+                      payload: {
+                        ...filterInputs,
+                        [[column.column_name]]: event.target.value,
+                      },
+                    })
+                  }
+                />
+              </Grid>
+            );
+          })}
       </Grid>
       <Container
         sx={{
