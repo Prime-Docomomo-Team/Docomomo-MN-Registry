@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import LogOutButton from '../LogOutButton/LogOutButton';
-import './Nav.css';
+
 import { useSelector } from 'react-redux';
 import { AppBar, Toolbar, Typography } from '@mui/material'
 
@@ -10,10 +10,10 @@ function Nav() {
 
   return (
 
-      <AppBar position="static">
+      <AppBar position="static" sx={{boxShadow: 0}}>
         <Toolbar sx={{ justifyContent: "space-between" }}>
-          <Link to="/home">
-            <Typography variant="h5" component="h2">
+          <Link to="/home" >
+            <Typography variant="h5" component="h2" >
               Minnesota Modern Registry
             </Typography>
           </Link>
