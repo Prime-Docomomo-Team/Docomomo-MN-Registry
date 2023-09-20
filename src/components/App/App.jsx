@@ -19,6 +19,7 @@ import LandingPage from "../LandingPage/LandingPage";
 import LoginPage from "../LoginPage/LoginPage";
 import RegisterPage from "../RegisterPage/RegisterPage";
 import Details from "../Details/Details";
+import DatabaseTable from "../DatabaseTable/DatabaseTable";
 
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 
@@ -114,6 +115,9 @@ function App() {
             </Route>
             <Route exact path="/details/:id">
               <Details />
+            </Route>
+            <Route exact path="/database">
+              <DatabaseTable />
             </Route>
 
             {/* If none of the other routes matched, we will show a 404. */}
