@@ -62,12 +62,29 @@ function* addSite(action) {
     console.log("Sites POST request failed", error);
   }
 }
+function* editSite(action) {
+  try {
+    const response = yield fetch("/api/sites", {
+      method: "PUT",
+      body: JSON.stringify(action.payload),
+      headers: { "Content-Type": "application/json" },
+    });
+    if (!response.ok) {
+      throw new Error("Error Editing Site");
+    }
+
+    yield put({ type: "FETCH_ALL_SITES" });
+  } catch (error) {
+    console.log("Sites PUT request failed", error);
+  }
+}
 
 function* sitesSaga() {
   yield takeLatest("FETCH_ALL_SITES", fetchAllSites);
   yield takeLatest("FETCH_FILTERED_SITES", fetchFilteredSites);
   yield takeLatest("FETCH_SITES_COLUMNS", fetchSitesColumns);
   yield takeLatest("ADD_SITE", addSite);
+  yield takeLatest("EDIT_SITE", editSite);
 }
 
 export default sitesSaga;

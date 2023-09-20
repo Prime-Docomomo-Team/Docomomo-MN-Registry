@@ -70,7 +70,6 @@ router.get("/columns", (req, res) => {
 /**
  * Adds new Site to database
  */
-// Add new reward from admin page
 router.post("/", (req, res) => {
   const queryText = `
         INSERT INTO sites 
@@ -89,6 +88,38 @@ router.post("/", (req, res) => {
     req.body.site_name,
     req.body.year_built,
     req.body.description,
+  ];
+  pool
+    .query(queryText, queryArgs)
+    .then((response) => res.sendStatus(200))
+    .catch((error) => {
+      console.log(error);
+      res.sendStatus(500);
+    });
+});
+
+/**
+ * Edit site in database
+ */
+router.put("/", (req, res) => {
+  const queryText = `
+        UPDATE sites 
+        SET street =$1, city =$2, state =$3, zip =$4, latitude =$5, longitude =$6, site_name =$7, architect =$8, year_built =$9, description =$10
+        WHERE $11 = id;
+        
+    `;
+  const queryArgs = [
+    req.body.street,
+    req.body.city,
+    req.body.state,
+    req.body.zip,
+    req.body.latitude,
+    req.body.longitude,
+    req.body.site_name,
+    req.body.architect,
+    req.body.year_built,
+    req.body.description,
+    req.body.id,
   ];
   pool
     .query(queryText, queryArgs)
