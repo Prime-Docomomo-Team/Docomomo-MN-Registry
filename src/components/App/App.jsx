@@ -19,12 +19,12 @@ import LandingPage from "../LandingPage/LandingPage";
 import LoginPage from "../LoginPage/LoginPage";
 import RegisterPage from "../RegisterPage/RegisterPage";
 import Details from "../Details/Details";
-import DatabaseTable from "../DatabaseTable/DatabaseTable";
+import SitesDatabase from "../DatabaseTable/SitesDatabase";
 
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 
 import "./App.css";
-import SitesDatabase from "../DatabaseTable/SitesDatabase";
+
 
 function App() {
   const dispatch = useDispatch();
@@ -116,9 +116,6 @@ function App() {
             </Route>
             <Route exact path="/details/:id">
               <Details />
-            </Route>
-            <Route exact path="/database">
-              <DatabaseTable />
             </Route>
             <Route exact path="/sites-database">
               <SitesDatabase />
