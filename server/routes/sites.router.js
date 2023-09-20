@@ -68,10 +68,35 @@ router.get("/columns", (req, res) => {
 });
 
 /**
- * POST route template
+ * Adds new Site to database
  */
+// Add new reward from admin page
 router.post("/", (req, res) => {
-  // POST route code here
+  const queryText = `
+        INSERT INTO sites 
+        (street, city, state, zip, latitude, longitude, site_name, architect, year_built, description)
+        VALUES
+        ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10);
+    `;
+  const queryArgs = [
+    req.body.street,
+    req.body.city,
+    req.body.state,
+    req.body.zip,
+    req.body.longitude,
+    req.body.latitude,
+    req.body.site_name,
+    req.body.site_name,
+    req.body.year_built,
+    req.body.description,
+  ];
+  pool
+    .query(queryText, queryArgs)
+    .then((response) => res.sendStatus(200))
+    .catch((error) => {
+      console.log(error);
+      res.sendStatus(500);
+    });
 });
 
 module.exports = router;
