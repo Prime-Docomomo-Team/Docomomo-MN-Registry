@@ -24,6 +24,7 @@ import DatabaseTable from "../DatabaseTable/DatabaseTable";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 
 import "./App.css";
+import SitesDatabase from "../DatabaseTable/SitesDatabase";
 
 function App() {
   const dispatch = useDispatch();
@@ -118,6 +119,9 @@ function App() {
             </Route>
             <Route exact path="/database">
               <DatabaseTable />
+            </Route>
+            <Route exact path="/sites-database">
+              <SitesDatabase />
             </Route>
 
             {/* If none of the other routes matched, we will show a 404. */}
