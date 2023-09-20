@@ -5,7 +5,7 @@ CREATE TABLE "sites" (
   "street" VARCHAR (500),
   "city" VARCHAR (80),
   "state" VARCHAR (80),
-  "zip" INT,
+  "zip" VARCHAR (50),
   "latitude" REAL,
   "longitude" REAL,
   "site_name" VARCHAR(1000),
