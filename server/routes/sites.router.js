@@ -130,4 +130,22 @@ router.put("/", (req, res) => {
     });
 });
 
+/**
+ * Delete
+ */
+router.delete("/:id", (req, res) => {
+  const queryText = `
+        DELETE FROM sites 
+        WHERE id = $1;
+    `;
+  const queryArgs = [req.params.id];
+  pool
+    .query(queryText, queryArgs)
+    .then((response) => res.sendStatus(204))
+    .catch((error) => {
+      console.log(error);
+      res.sendStatus(500);
+    });
+});
+
 module.exports = router;
