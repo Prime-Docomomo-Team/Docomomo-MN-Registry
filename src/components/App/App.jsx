@@ -98,7 +98,13 @@ function App() {
               )}
             </Route>
             <Route exact path="/site-photos-database">
-              <SitePhotosDatabase />
+            {user.admin ? (
+                //If the user is an admin, show SitesDatabase
+                <SitePhotosDatabase />
+              ) : (
+                //Otherwise, show LandingPage
+                <LandingPage />
+              )}
             </Route>
 
             {/* If none of the other routes matched, we will show a 404. */}
