@@ -3,6 +3,7 @@ import { useTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import MobileStepper from "@mui/material/MobileStepper";
 import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
 import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
 import SwipeableViews from "react-swipeable-views-react-18-fix";
@@ -28,7 +29,7 @@ function ImageStepper({ images }) {
   };
 
   return (
-    <Box sx={{ maxWidth: 400, flexGrow: 1 }}>
+    <Box sx={{ maxWidth: 400, flexGrow: 1, position: "relative" }}>
       <AutoPlaySwipeableViews
         axis={theme.direction === "rtl" ? "x-reverse" : "x"}
         index={activeStep}
@@ -54,6 +55,16 @@ function ImageStepper({ images }) {
           </div>
         ))}
       </AutoPlaySwipeableViews>
+      <Typography
+        sx={{
+          position: "absolute",
+          bottom: 45,
+          right: 4,
+          color: "secondary.main",
+        }}
+      >
+        {images[activeStep].photo_credit}
+      </Typography>
       {images.length > 1 && (
         <MobileStepper
           steps={maxSteps}
