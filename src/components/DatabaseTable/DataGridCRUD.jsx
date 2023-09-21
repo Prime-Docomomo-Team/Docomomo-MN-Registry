@@ -197,7 +197,6 @@ export default function FullFeaturedCrudGrid(props) {
         slotProps={{
           toolbar: { setRows, setRowModesModel, rowTitle: props.rowTitle },
         }}
-        getRowId={props.title === "Photos" && ((row) => row.photo_id)}
         sx={{ bgcolor: "background.paper", backgroundImage: "none" }}
       />
       <Dialog

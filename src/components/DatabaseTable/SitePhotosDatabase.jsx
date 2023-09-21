@@ -20,7 +20,7 @@ const SitePhotosDatabase = () => {
 
   // These are the columns for the DataGrid on Rewards page
   const columns = [
-    { field: "photo_id", headerName: "Photo ID", width: 70 },
+    { field: "id", headerName: "Photo ID", width: 70 },
 
     {
       field: "photo_name",
@@ -57,7 +57,7 @@ const SitePhotosDatabase = () => {
   return (
     <DataGridCRUD
       columns={columns}
-      rows={photos}
+      rows={photos.map((row) => ({ ...row, id: row.photo_id }))}
       title="Photos"
       rowTitle="Photo"
       dispatchTypes={dispatchTypes}
