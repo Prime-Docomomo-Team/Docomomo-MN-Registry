@@ -17,8 +17,8 @@ const Map = () => {
   const sites = useSelector((store) => store.sites);
   const [map, setMap] = useState(null);
   const [activeMarker, setActiveMarker] = useState(null);
-  const center = useMemo(() => ({ lat: 46.7296, lng: -94.6859 }), []);
-  const options = useMemo(() => ({ mapId: "8eb7cad122f99b95" }), []);
+  // const center = useMemo(() => ({ lat: 46.7296, lng: -94.6859 }), []);
+  // const options = useMemo(() => ({ mapId: "8eb7cad122f99b95" }), []);
   const clustererRef = useRef();
   console.log("Sites with photos: ", sites);
 
@@ -59,7 +59,7 @@ const Map = () => {
   return (
     <GoogleMap
       onLoad={onLoadMap}
-      options={{ mapId: "8eb7cad122f99b95" }}
+      // options={{ mapId: "8eb7cad122f99b95" }}
       // zoom={6}
       // center={center}
       mapContainerClassName="map-container"
