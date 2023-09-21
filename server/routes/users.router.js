@@ -23,8 +23,9 @@ router.get("/", (req, res) => {
  * Adds new User to database
  */
 router.post("/", (req, res) => {
+  console.log("hi", req.body);
   const queryText = `
-        INSERT INTO user 
+        INSERT INTO "user" 
         (username, password, admin)
         VALUES
         ($1, $2, $3);
@@ -44,7 +45,7 @@ router.post("/", (req, res) => {
  */
 router.put("/", (req, res) => {
   const queryText = `
-        UPDATE user 
+        UPDATE "user" 
         SET username =$1, password =$2, admin =$3
         WHERE $4 = id;
         
@@ -69,7 +70,7 @@ router.put("/", (req, res) => {
  */
 router.delete("/:id", (req, res) => {
   const queryText = `
-        DELETE FROM user
+        DELETE FROM "user"
         WHERE id = $1;
     `;
   const queryArgs = [req.params.id];
