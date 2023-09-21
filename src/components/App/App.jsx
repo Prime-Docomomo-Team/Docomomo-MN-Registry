@@ -23,7 +23,7 @@ import SitesDatabase from "../DatabaseTable/SitesDatabase";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 
 import "./App.css";
-
+import SitePhotosDatabase from "../DatabaseTable/SitePhotosDatabase";
 
 function App() {
   const dispatch = useDispatch();
@@ -59,7 +59,6 @@ function App() {
           <Switch>
             {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
             <Redirect exact from="/" to="/home" />
-
 
             {/* For protected routes, the view could show one of several things on the same route.
             Visiting localhost:3000/user will show the UserPage if the user is logged in.
@@ -110,6 +109,9 @@ function App() {
             </Route>
             <Route exact path="/sites-database">
               <SitesDatabase />
+            </Route>
+            <Route exact path="/site-photos-database">
+              <SitePhotosDatabase />
             </Route>
 
             {/* If none of the other routes matched, we will show a 404. */}
