@@ -52,7 +52,7 @@ function LoginForm() {
           </h3>
         )}
       </Box>
-      <Box>
+      <Box display='flex' >
         <TextField
           type="text"
           variant="outlined"
