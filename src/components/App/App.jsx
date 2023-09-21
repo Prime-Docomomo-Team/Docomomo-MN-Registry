@@ -24,12 +24,13 @@ import { ThemeProvider, createTheme } from "@mui/material/styles";
 
 import "./App.css";
 import SitePhotosDatabase from "../DatabaseTable/SitePhotosDatabase";
+import UserDatabase from "../DatabaseTable/UserDatabase";
 
 function App() {
   const dispatch = useDispatch();
 
   const user = useSelector((store) => store.user);
-  console.log('Here is the user:', user);
+  console.log("Here is the user:", user);
 
   useEffect(() => {
     dispatch({ type: "FETCH_USER" });
@@ -98,9 +99,18 @@ function App() {
               )}
             </Route>
             <Route exact path="/site-photos-database">
-            {user.admin ? (
+              {user.admin ? (
                 //If the user is an admin, show SitesDatabase
                 <SitePhotosDatabase />
+              ) : (
+                //Otherwise, show LandingPage
+                <LandingPage />
+              )}
+            </Route>
+            <Route exact path="/user-database">
+              {user.admin ? (
+                //If the user is an admin, show SitesDatabase
+                <UserDatabase />
               ) : (
                 //Otherwise, show LandingPage
                 <LandingPage />
