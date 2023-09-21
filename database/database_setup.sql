@@ -25,5 +25,6 @@ CREATE TABLE "site_photos" (
 CREATE TABLE "user" (
   "id" SERIAL PRIMARY KEY,
   "username" VARCHAR (80) NOT NULL,
-  "password" VARCHAR (1000) NOT NULL
+  "password" VARCHAR (1000) NOT NULL,
+  "admin" BOOLEAN NOT NULL;
 );
