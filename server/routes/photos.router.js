@@ -18,6 +18,22 @@ router.get("/:id", (req, res) => {
       res.sendStatus(500);
     });
 });
+/**
+ * GET All Photos
+ */
+router.get("/", (req, res) => {
+  const queryText = `SELECT * FROM "site_photos";`;
+  pool
+    .query(queryText)
+    .then((result) => {
+      res.send(result.rows);
+      console.log("All  photos from server:", result.rows);
+    })
+    .catch((error) => {
+      console.log("Error completing SELECT All images query", error);
+      res.sendStatus(500);
+    });
+});
 
 /**
  * POST route template
