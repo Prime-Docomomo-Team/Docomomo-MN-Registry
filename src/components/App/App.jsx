@@ -23,7 +23,7 @@ import SitesDatabase from "../DatabaseTable/SitesDatabase";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 
 import "./App.css";
-
+import SitePhotosDatabase from "../DatabaseTable/SitePhotosDatabase";
 
 function App() {
   const dispatch = useDispatch();
@@ -60,7 +60,6 @@ function App() {
           <Switch>
             {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
             <Redirect exact from="/" to="/home" />
-
             <Route exact path="/login">
               {user.id ? (
                 // If the user is already logged in,
@@ -97,6 +96,9 @@ function App() {
                 //Otherwise, show LandingPage
                 <LandingPage />
               )}
+            </Route>
+            <Route exact path="/site-photos-database">
+              <SitePhotosDatabase />
             </Route>
 
             {/* If none of the other routes matched, we will show a 404. */}
