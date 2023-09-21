@@ -5381,3 +5381,5 @@ VALUES
 (5379,E'Roseville-SnellingAveN-2940-01.jpg',E'1zTdKWgZEL-K1UVLheR2iJohGnhM4Sy3m',1479482,NULL),
 (5380,E'GV-OlsonMemHwy-8200.JPG',E'1xWu24aYnPzUqvdtidxODsiRh_w77pmLw',1066764,NULL),
 (5381,E'Edina-EdinaIndustBlvd-5100.JPG',E'1-YsA7vgwJZhxpjoKjkll6QV5KLbIsfa-',3164271,NULL);
+
+SELECT setval('site_photos_photo_id_seq', max(photo_id)) FROM site_photos;
