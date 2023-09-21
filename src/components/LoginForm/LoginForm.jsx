@@ -64,7 +64,7 @@ function LoginForm() {
           sx={{ margin: 1 }}
         ></TextField>
         <TextField
-          type="text"
+          type="password"
           variant="outlined"
           label="Password:"
           value={password}
