@@ -38,7 +38,7 @@ const Filters = () => {
     for (const key in filterInputs) {
       payload.push({ field: key, input: filterInputs[key] });
     }
-    console.log("payload", payload);
+  
     dispatch({
       type: "FETCH_FILTERED_SITES",
       payload,
@@ -63,7 +63,7 @@ const Filters = () => {
           .map((column) => {
             if (column.column_name === "state") {
               return (
-                <Grid item xs={3}>
+                <Grid item xs={3} key={column.column_name}>
                   <TextField
                     fullWidth
                     variant="standard"
@@ -92,7 +92,7 @@ const Filters = () => {
               );
             }
             return (
-              <Grid item xs={3}>
+              <Grid item xs={3} key={column.column_name}>
                 <TextField
                   variant="standard"
                   key={column.ordinal_position}

@@ -11,7 +11,7 @@ function Nav() {
 
   return (
     <AppBar position="static" sx={{ boxShadow: 0 }}>
-      <Toolbar sx={{display: 'flex', justifyContent: 'space-between'}}>
+      <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
         <Link to="/home">
           <Box
             component="img"
@@ -19,25 +19,31 @@ function Nav() {
             height={45}
             alt="docomomo MN US logo"
             sx={{ margin: 2, marginLeft: 0 }}
+            onClick={history.push("/home")}
           ></Box>
         </Link>
+        <Box>
+          {/* If no user is logged in, show these links */}
+          {!user.id && (
+            // If there's no user, show login/registration links
 
-        {/* If no user is logged in, show these links */}
-        {!user.id && (
-          // If there's no user, show login/registration links
-          <Box>
             <Link to="/login">
-              <Button sx={{color: '#FFFFFF'}} >Login</Button>
+              <Button sx={{ color: "#FFFFFF" }}>Login</Button>
             </Link>
-          </Box>
-        )}
-        {/* If a user is logged in, show these links */}
-        {user.id && (
-          <Box>
-            <Button color="secondary" onClick={()=>history.push('/sites-database')}>Database</Button>
-            <LogOutButton className="navLink" />
-          </Box>
-        )}
+          )}
+
+          {/* If a user is an admin, show the sites database button */}
+          {user.admin && (
+            <Button
+              color="secondary"
+              onClick={() => history.push("/sites-database")}
+            >
+              Database
+            </Button>
+          )}
+          {/* If a user is logged in, show logout button */}
+          {user.id && <LogOutButton className="navLink" />}
+        </Box>
       </Toolbar>
     </AppBar>
   );

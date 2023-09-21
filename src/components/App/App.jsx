@@ -29,6 +29,7 @@ function App() {
   const dispatch = useDispatch();
 
   const user = useSelector((store) => store.user);
+  console.log('Here is the user:', user);
 
   useEffect(() => {
     dispatch({ type: "FETCH_USER" });
@@ -89,8 +90,8 @@ function App() {
               <Details />
             </Route>
             <Route exact path="/sites-database">
-              {user.id ? (
-                //If the user is logged in, show SitesDatabase
+              {user.admin ? (
+                //If the user is an admin, show SitesDatabase
                 <SitesDatabase />
               ) : (
                 //Otherwise, show LandingPage
