@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import {useSelector} from 'react-redux';
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import { Box, Typography, TextField, Button } from "@mui/material";
 
 function LoginForm() {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const errors = useSelector(store => store.errors);
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const errors = useSelector((store) => store.errors);
   const dispatch = useDispatch();
 
   const login = (event) => {
@@ -13,53 +14,72 @@ function LoginForm() {
 
     if (username && password) {
       dispatch({
-        type: 'LOGIN',
+        type: "LOGIN",
         payload: {
           username: username,
           password: password,
         },
       });
     } else {
-      dispatch({ type: 'LOGIN_INPUT_ERROR' });
+      dispatch({ type: "LOGIN_INPUT_ERROR" });
     }
   }; // end login
 
   return (
-    <form className="formPanel" onSubmit={login}>
-      <h2>Login</h2>
-      {errors.loginMessage && (
-        <h3 className="alert" role="alert">
-          {errors.loginMessage}
-        </h3>
-      )}
-      <div>
-        <label htmlFor="username">
-          Username:
-          <input
-            type="text"
-            name="username"
-            required
-            value={username}
-            onChange={(event) => setUsername(event.target.value)}
-          />
-        </label>
-      </div>
-      <div>
-        <label htmlFor="password">
-          Password:
-          <input
-            type="password"
-            name="password"
-            required
-            value={password}
-            onChange={(event) => setPassword(event.target.value)}
-          />
-        </label>
-      </div>
-      <div>
-        <input className="btn" type="submit" name="submit" value="Log In" />
-      </div>
-    </form>
+    <Box
+      component="form"
+      onSubmit={login}
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        gap: 2,
+        alignItems: "center",
+        boxShadow: 2,
+        borderRadius: 2,
+        padding: 2,
+        maxWidth: 400,
+        margin: "auto",
+        marginTop: 8,
+      }}
+    >
+      <Box>
+        <Typography component="h3" variant="h4">
+          LOGIN
+        </Typography>
+        {errors.loginMessage && (
+          <h3 className="alert" role="alert">
+            {errors.loginMessage}
+          </h3>
+        )}
+      </Box>
+      <Box>
+        <TextField
+          type="text"
+          variant="outlined"
+          label="Username:"
+          value={username}
+          color="secondary"
+          onChange={(event) => setUsername(event.target.value)}
+          required
+          sx={{ margin: 1 }}
+        ></TextField>
+        <TextField
+          type="text"
+          variant="outlined"
+          label="Password:"
+          value={password}
+          color="secondary"
+          onChange={(event) => setPassword(event.target.value)}
+          required
+          sx={{ margin: 1 }}
+        ></TextField>
+      </Box>
+      <Box>
+        <Button type="submit" variant="contained">
+          Submit
+        </Button>
+      </Box>
+    </Box>
   );
 }
 
