@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Box, Typography, TextField, Button } from "@mui/material";
 
 function RegisterForm() {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
   const errors = useSelector((store) => store.errors);
   const dispatch = useDispatch();
 
@@ -11,7 +12,7 @@ function RegisterForm() {
     event.preventDefault();
 
     dispatch({
-      type: 'REGISTER',
+      type: "REGISTER",
       payload: {
         username: username,
         password: password,
@@ -20,41 +21,60 @@ function RegisterForm() {
   }; // end registerUser
 
   return (
-    <form className="formPanel" onSubmit={registerUser}>
-      <h2>Register User</h2>
-      {errors.registrationMessage && (
-        <h3 className="alert" role="alert">
-          {errors.registrationMessage}
-        </h3>
-      )}
-      <div>
-        <label htmlFor="username">
-          Username:
-          <input
-            type="text"
-            name="username"
-            value={username}
-            required
-            onChange={(event) => setUsername(event.target.value)}
-          />
-        </label>
-      </div>
-      <div>
-        <label htmlFor="password">
-          Password:
-          <input
-            type="password"
-            name="password"
-            value={password}
-            required
-            onChange={(event) => setPassword(event.target.value)}
-          />
-        </label>
-      </div>
-      <div>
-        <input className="btn" type="submit" name="submit" value="Register" />
-      </div>
-    </form>
+    <Box
+      component="form"
+      onSubmit={registerUser}
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        gap: 2,
+        alignItems: "center",
+        boxShadow: 2,
+        borderRadius: 2,
+        padding: 2,
+        maxWidth: 400,
+        margin: "auto",
+        marginTop: 8,
+      }}
+    >
+      <Box>
+        <Typography component="h3" variant="h4">
+          REGISTER
+        </Typography>
+        {errors.registrationMessage && (
+          <h3 className="alert" role="alert">
+            {errors.registrationMessage}
+          </h3>
+        )}
+      </Box>
+      <Box>
+        <TextField
+          type="text"
+          variant="outlined"
+          label="Username:"
+          value={username}
+          color="secondary"
+          onChange={(event) => setUsername(event.target.value)}
+          required
+          sx={{ margin: 1 }}
+        ></TextField>
+        <TextField
+          type="password"
+          variant="outlined"
+          label="Password:"
+          value={password}
+          color="secondary"
+          onChange={(event) => setPassword(event.target.value)}
+          required
+          sx={{ margin: 1 }}
+        ></TextField>
+      </Box>
+      <Box>
+        <Button type="submit" variant="contained">
+          Submit
+        </Button>
+      </Box>
+    </Box>
   );
 }
 

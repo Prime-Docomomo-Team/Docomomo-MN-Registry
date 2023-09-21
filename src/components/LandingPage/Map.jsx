@@ -20,7 +20,6 @@ const Map = () => {
   // const center = useMemo(() => ({ lat: 46.7296, lng: -94.6859 }), []);
   // const options = useMemo(() => ({ mapId: "8eb7cad122f99b95" }), []);
   const clustererRef = useRef();
-  console.log("Sites with photos: ", sites);
 
   // No longer needed? Now that we are applying filters to load markers.
   // useEffect(() => {
@@ -52,9 +51,6 @@ const Map = () => {
     }
     setActiveMarker(marker);
   };
-
-  console.log(sites);
-  console.log("api key", process.env.REACT_APP_GOOGLE_MAPS_API_KEY);
 
   return (
     <GoogleMap
