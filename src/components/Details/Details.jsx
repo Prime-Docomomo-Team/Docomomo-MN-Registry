@@ -52,7 +52,7 @@ const Details = () => {
         </Grid>
       </Grid>
       <Grid container justifyContent="center">
-        <Grid item xs={12} sm={8} md={6} lg={5}>
+        <Grid display='flex' item xs={12} sm={8} md={6} lg={5} justifyContent='center' alignItems='center'>
           {photos.length > 0 && <ImageStepper images={photos} />}
         </Grid>
       </Grid>

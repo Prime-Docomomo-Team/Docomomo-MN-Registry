@@ -41,7 +41,7 @@ function ImageStepper({ images }) {
               <Box
                 component="img"
                 sx={{
-                  height: 255,
+                  height: 275,
                   display: "block",
                   maxWidth: 400,
                   overflow: "hidden",

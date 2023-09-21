@@ -21,3 +21,9 @@ CREATE TABLE "site_photos" (
   "size" INT,
   "sites_id" INT REFERENCES "sites"
 );
+
+CREATE TABLE "user" (
+  "id" SERIAL PRIMARY KEY,
+  "username" VARCHAR (80) NOT NULL,
+  "password" VARCHAR (1000) NOT NULL
+);
