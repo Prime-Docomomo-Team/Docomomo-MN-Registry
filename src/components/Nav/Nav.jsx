@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import LogOutButton from "../LogOutButton/LogOutButton";
 import { useSelector } from "react-redux";
 import { AppBar, Toolbar, Box, Button } from "@mui/material";
@@ -7,6 +7,7 @@ import docomomoLogo from "../../images/docomomoLogo.png";
 
 function Nav() {
   const user = useSelector((store) => store.user);
+  const history = useHistory();
 
   return (
     <AppBar position="static" sx={{ boxShadow: 0 }}>
@@ -28,16 +29,14 @@ function Nav() {
             <Link to="/login">
               <Button sx={{color: '#FFFFFF'}} >Login</Button>
             </Link>
-            <Link to="/login">
-              <Button color='secondary'>Request an account</Button>
-            </Link>
           </Box>
         )}
         {/* If a user is logged in, show these links */}
         {user.id && (
-          <>
+          <Box>
+            <Button color="secondary" onClick={()=>history.push('/sites-database')}>Database</Button>
             <LogOutButton className="navLink" />
-          </>
+          </Box>
         )}
       </Toolbar>
     </AppBar>
