@@ -89,23 +89,24 @@ router.post("/columns", (req, res) => {
  * Adds new Site to database
  */
 router.post("/", (req, res) => {
+  const columns = `${req.body.columns
+    .filter((column) => column.field !== "id")
+    .map((column) => column.field)
+    .join(", ")}`;
+  const values = `${req.body.columns
+    .filter((column) => column.field !== "id")
+    .map((column, index) => `$${index + 1}`)
+    .join(", ")}`;
   const queryText = `
         INSERT INTO sites 
-        (street, city, state, zip, latitude, longitude, site_name, architect, year_built, description)
+        (${columns})
         VALUES
-        ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10);
+        (${values});
     `;
   const queryArgs = [
-    req.body.street,
-    req.body.city,
-    req.body.state,
-    req.body.zip,
-    req.body.longitude,
-    req.body.latitude,
-    req.body.site_name,
-    req.body.site_name,
-    req.body.year_built,
-    req.body.description,
+    ...req.body.columns
+      .filter((column) => column.field !== "id")
+      .map((column) => req.body[column.field]),
   ];
   pool
     .query(queryText, queryArgs)
@@ -124,7 +125,7 @@ router.put("/", (req, res) => {
     .filter((column) => column.field !== "id")
     .map((column, index) => `${column.field} = $${index + 2}`)
     .join(", ")}`;
-  console.log(setStatement);
+
   const queryText = `
         UPDATE sites 
         SET ${setStatement}
@@ -137,7 +138,7 @@ router.put("/", (req, res) => {
       .filter((column) => column.field !== "id")
       .map((column) => req.body[column.field]),
   ];
-  console.log("args", queryArgs);
+
   pool
     .query(queryText, queryArgs)
     .then((response) => res.sendStatus(200))
