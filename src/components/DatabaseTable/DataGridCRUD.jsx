@@ -6,6 +6,7 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import AddIcon from "@mui/icons-material/Add";
+import RemoveIcon from "@mui/icons-material/Remove";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/DeleteOutlined";
 import SaveIcon from "@mui/icons-material/Save";
@@ -25,6 +26,7 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import AddColumnModal from "./AddColumnModal";
+import RemoveColumnModal from "./RemoveColumnModal";
 
 function EditToolbar(props) {
   const { setRows, setRowModesModel } = props;
@@ -43,8 +45,6 @@ function EditToolbar(props) {
     }));
   };
 
-  const handleAddColumnClick = () => {};
-
   return (
     <GridToolbarContainer>
       <Button color="primary" startIcon={<AddIcon />} onClick={handleClick}>
@@ -56,6 +56,18 @@ function EditToolbar(props) {
             Add Column
           </Button>
           <AddColumnModal
+            open={open}
+            handleOpen={handleOpen}
+            handleClose={handleClose}
+          />
+          <Button
+            color="secondary"
+            startIcon={<RemoveIcon />}
+            onClick={handleOpen}
+          >
+            Remove Column
+          </Button>
+          <RemoveColumnModal
             open={open}
             handleOpen={handleOpen}
             handleClose={handleClose}

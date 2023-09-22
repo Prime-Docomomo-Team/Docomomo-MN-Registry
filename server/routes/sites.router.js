@@ -85,6 +85,27 @@ router.post("/columns", (req, res) => {
       res.sendStatus(500);
     });
 });
+
+/**
+ * Delete a column from sites table
+ */
+router.delete("/columns/:columnName", (req, res) => {
+  const columnName = req.params.columnName.toLowerCase().replace(" ", "_");
+  console.log("column_name", columnName);
+  const queryText = `
+        ALTER TABLE sites 
+        DROP COLUMN ${columnName};
+    `;
+  const queryArgs = [req.params.columnName.toLowerCase().replace(" ", "_")];
+  pool
+    .query(queryText)
+    .then((response) => res.sendStatus(204))
+    .catch((error) => {
+      console.log(error);
+      res.sendStatus(500);
+    });
+});
+
 /**
  * Adds new Site to database
  */

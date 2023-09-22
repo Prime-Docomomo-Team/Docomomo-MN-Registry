@@ -63,6 +63,27 @@ function* addSitesColumn(action) {
     console.log("Sites Column POST request failed", error);
   }
 }
+
+function* removeSitesColumn(action) {
+  try {
+    const response = yield fetch(
+      `/api/sites/columns/${action.payload.columnName}`,
+      {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+      }
+    );
+    if (!response.ok) {
+      throw new Error("Error Removing Sites Column");
+    }
+
+    yield put({ type: "FETCH_ALL_SITES" });
+    yield put({ type: "FETCH_SITES_COLUMNS" });
+  } catch (error) {
+    console.log("Sites Column DELETE request failed", error);
+  }
+}
+
 function* addSite(action) {
   try {
     const response = yield fetch("/api/sites", {
@@ -116,6 +137,7 @@ function* sitesSaga() {
   yield takeLatest("FETCH_ALL_SITES", fetchAllSites);
   yield takeLatest("FETCH_FILTERED_SITES", fetchFilteredSites);
   yield takeLatest("FETCH_SITES_COLUMNS", fetchSitesColumns);
+  yield takeLatest("REMOVE_SITES_COLUMN", removeSitesColumn);
   yield takeLatest("ADD_SITES_COLUMN", addSitesColumn);
   yield takeLatest("ADD_SITE", addSite);
   yield takeLatest("EDIT_SITE", editSite);
