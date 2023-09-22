@@ -24,9 +24,15 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
+import AddColumnModal from "./AddColumnModal";
 
 function EditToolbar(props) {
   const { setRows, setRowModesModel } = props;
+
+  // For add column Modal
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   const handleClick = () => {
     const id = Math.random() * 100000 + 300;
@@ -37,11 +43,25 @@ function EditToolbar(props) {
     }));
   };
 
+  const handleAddColumnClick = () => {};
+
   return (
     <GridToolbarContainer>
       <Button color="primary" startIcon={<AddIcon />} onClick={handleClick}>
         Add {props.rowTitle}
       </Button>
+      {props.rowTitle === "Site" && (
+        <>
+          <Button color="primary" startIcon={<AddIcon />} onClick={handleOpen}>
+            Add Column
+          </Button>
+          <AddColumnModal
+            open={open}
+            handleOpen={handleOpen}
+            handleClose={handleClose}
+          />
+        </>
+      )}
     </GridToolbarContainer>
   );
 }
