@@ -124,9 +124,15 @@ export default function FullFeaturedCrudGrid(props) {
     setRows(rows.map((row) => (row.id === newRow.id ? updatedRow : row)));
     // UPDATE Reward in database
     if (newRow.isNew) {
-      dispatch({ type: props.dispatchTypes.ADD, payload: newRow });
+      dispatch({
+        type: props.dispatchTypes.ADD,
+        payload: { ...newRow, columns: props.columns },
+      });
     } else {
-      dispatch({ type: props.dispatchTypes.EDIT, payload: newRow });
+      dispatch({
+        type: props.dispatchTypes.EDIT,
+        payload: { ...newRow, columns: props.columns },
+      });
     }
 
     return updatedRow;

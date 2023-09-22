@@ -89,23 +89,24 @@ router.post("/columns", (req, res) => {
  * Adds new Site to database
  */
 router.post("/", (req, res) => {
+  const columns = `${req.body.columns
+    .filter((column) => column.field !== "id")
+    .map((column) => column.field)
+    .join(", ")}`;
+  const values = `${req.body.columns
+    .filter((column) => column.field !== "id")
+    .map((column, index) => `$${index + 1}`)
+    .join(", ")}`;
   const queryText = `
         INSERT INTO sites 
-        (street, city, state, zip, latitude, longitude, site_name, architect, year_built, description)
+        (${columns})
         VALUES
-        ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10);
+        (${values});
     `;
   const queryArgs = [
-    req.body.street,
-    req.body.city,
-    req.body.state,
-    req.body.zip,
-    req.body.longitude,
-    req.body.latitude,
-    req.body.site_name,
-    req.body.site_name,
-    req.body.year_built,
-    req.body.description,
+    ...req.body.columns
+      .filter((column) => column.field !== "id")
+      .map((column) => req.body[column.field]),
   ];
   pool
     .query(queryText, queryArgs)
@@ -120,25 +121,24 @@ router.post("/", (req, res) => {
  * Edit site in database
  */
 router.put("/", (req, res) => {
+  const setStatement = `${req.body.columns
+    .filter((column) => column.field !== "id")
+    .map((column, index) => `${column.field} = $${index + 2}`)
+    .join(", ")}`;
+
   const queryText = `
         UPDATE sites 
-        SET street =$1, city =$2, state =$3, zip =$4, latitude =$5, longitude =$6, site_name =$7, architect =$8, year_built =$9, description =$10
-        WHERE $11 = id;
+        SET ${setStatement}
+        WHERE $1 = id;
         
     `;
   const queryArgs = [
-    req.body.street,
-    req.body.city,
-    req.body.state,
-    req.body.zip,
-    req.body.latitude,
-    req.body.longitude,
-    req.body.site_name,
-    req.body.architect,
-    req.body.year_built,
-    req.body.description,
     req.body.id,
+    ...req.body.columns
+      .filter((column) => column.field !== "id")
+      .map((column) => req.body[column.field]),
   ];
+
   pool
     .query(queryText, queryArgs)
     .then((response) => res.sendStatus(200))
