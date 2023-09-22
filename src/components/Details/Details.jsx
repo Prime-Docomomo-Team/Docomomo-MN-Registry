@@ -21,6 +21,8 @@ const Details = () => {
     year_built,
     description,
   } = useSelector((store) => store.details);
+  const details = useSelector((store) => store.details);
+  const sitesColumns = useSelector((store) => store.sitesColumns);
   const photos = useSelector((store) => store.photos);
   console.log(photos);
 
@@ -52,7 +54,16 @@ const Details = () => {
         </Grid>
       </Grid>
       <Grid container justifyContent="center">
-        <Grid display='flex' item xs={12} sm={8} md={6} lg={5} justifyContent='center' alignItems='center'>
+        <Grid
+          display="flex"
+          item
+          xs={12}
+          sm={8}
+          md={6}
+          lg={5}
+          justifyContent="center"
+          alignItems="center"
+        >
           {photos.length > 0 && <ImageStepper images={photos} />}
         </Grid>
       </Grid>
@@ -93,46 +104,53 @@ const Details = () => {
             </Typography>
           </Grid>
         </Grid>
-        <Grid
-          item
-          justifyContent="center"
-          display="flex"
-          flexDirection="column"
-        >
-          <Grid item sx={{ textAlign: "center" }}>
-            <Typography
-              component="h5"
-              variant="h5"
-              sx={{ fontWeight: "bold" }}
-              color="primary"
-            >
-              Architect
-            </Typography>
-          </Grid>
-          <Grid item sx={{ textAlign: "center" }}>
-            <Typography>{architect}</Typography>
-          </Grid>
-        </Grid>
-        <Grid
-          item
-          justifyContent="center"
-          display="flex"
-          flexDirection="column"
-        >
-          <Grid item sx={{ textAlign: "center" }}>
-            <Typography
-              component="h5"
-              variant="h5"
-              sx={{ fontWeight: "bold" }}
-              color="primary"
-            >
-              Year Built
-            </Typography>
-          </Grid>
-          <Grid item sx={{ textAlign: "center" }}>
-            <Typography>{year_built}</Typography>
-          </Grid>
-        </Grid>
+        {/* Dynamically fill in rest of columns */}
+        {sitesColumns
+          .filter(
+            (column) =>
+              ![
+                "id",
+                "street",
+                "city",
+                "state",
+                "zip",
+                "site_name",
+                "description",
+                "latitude",
+                "longitude",
+              ].includes(column.column_name)
+          )
+          .map(
+            (column) =>
+              details[column.column_name] && (
+                <Grid
+                  item
+                  justifyContent="center"
+                  display="flex"
+                  flexDirection="column"
+                  key={column.column_name}
+                >
+                  <Grid item sx={{ textAlign: "center" }}>
+                    <Typography
+                      component="h5"
+                      variant="h5"
+                      sx={{ fontWeight: "bold" }}
+                      color="primary"
+                    >
+                      {column.column_name
+                        .split("_")
+                        .map(
+                          (word) => word.charAt(0).toUpperCase() + word.slice(1)
+                        )
+                        .join(" ")}
+                    </Typography>
+                  </Grid>
+                  <Grid item sx={{ textAlign: "center" }}>
+                    <Typography>{details[column.column_name]}</Typography>
+                  </Grid>
+                </Grid>
+              )
+          )}
       </Grid>
       {description != null && (
         <>
