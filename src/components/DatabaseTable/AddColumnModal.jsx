@@ -26,7 +26,7 @@ export default function AddColumnModal({ open, handleClose }) {
   const [newColumnName, setNewColumnName] = useState("");
 
   const handleSubmit = () => {
-    dispatch({ type: "ADD_COLUMN", payload: { newColumnName } });
+    dispatch({ type: "ADD_SITES_COLUMN", payload: { newColumnName } });
   };
   return (
     <div>

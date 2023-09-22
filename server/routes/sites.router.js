@@ -68,6 +68,24 @@ router.get("/columns", (req, res) => {
 });
 
 /**
+ * Adds new column to sites table in database
+ */
+router.post("/columns", (req, res) => {
+  const newColumnName = req.body.newColumnName.toLowerCase().replace(" ", "_");
+  const queryText = `
+    ALTER TABLE sites ADD ${newColumnName} VARCHAR(1000);
+    `;
+  const queryArgs = [req.body.newColumnName.toLowerCase().replace(" ", "_")];
+  console.log("args", queryArgs);
+  pool
+    .query(queryText)
+    .then((response) => res.sendStatus(200))
+    .catch((error) => {
+      console.log(error);
+      res.sendStatus(500);
+    });
+});
+/**
  * Adds new Site to database
  */
 router.post("/", (req, res) => {
