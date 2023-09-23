@@ -24,13 +24,15 @@ const states = [
 
 const Filters = () => {
   const dispatch = useDispatch();
-  const { sitesColumns, filterInputs } = useSelector((store) => store);
+  const { sitesColumns, filterInputs, sites } = useSelector((store) => store);
 
   // const [filterInputs, setFilterInputs] = useState({});
 
   useEffect(() => {
     dispatch({ type: "FETCH_SITES_COLUMNS" });
-    applyFilters();
+    if (!sites || sites.length === 0) {
+      applyFilters();
+    }
   }, []);
 
   const applyFilters = () => {
@@ -38,7 +40,7 @@ const Filters = () => {
     for (const key in filterInputs) {
       payload.push({ field: key, input: filterInputs[key] });
     }
-  
+
     dispatch({
       type: "FETCH_FILTERED_SITES",
       payload,
