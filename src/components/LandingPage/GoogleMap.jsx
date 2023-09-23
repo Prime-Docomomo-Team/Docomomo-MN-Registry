@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect } from "react";
+import { useState, useCallback, useEffect, useMemo } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { GoogleMapProvider } from "@ubilabs/google-maps-react-hooks";
 import { MarkerClusterer } from "@googlemaps/markerclusterer";
@@ -8,11 +8,6 @@ import { Button, Box, Typography } from "@mui/material";
 import { ReactDOM } from "react";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
-const mapOptions = {
-  zoom: 6,
-  center: { lat: 44.986656, lng: -93.258133 },
-};
-
 const GoogleMap = () => {
   const history = useHistory();
   const dispatch = useDispatch();
@@ -20,6 +15,15 @@ const GoogleMap = () => {
   const [mapContainer, setMapContainer] = useState(null);
   const [markerCluster, setMarkerCluster] = useState(null);
   const [map, setMap] = useState(null);
+
+  const mapOptions = useMemo(
+    () => ({
+      zoom: 6,
+      mapId: "8eb7cad122f99b95",
+    }),
+    []
+  );
+
   const onLoad = useCallback(
     (map) => {
       addMarkers(map);
