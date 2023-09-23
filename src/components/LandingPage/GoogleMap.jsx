@@ -41,18 +41,17 @@ const GoogleMap = () => {
       markerCluster.clearMarkers();
     }
     const infoWindow = new google.maps.InfoWindow();
+    const bounds = new google.maps.LatLngBounds();
 
     const markers = sites.map((site) => {
       const marker = new google.maps.Marker({
         position: { lat: site.latitude, lng: site.longitude },
       });
 
+      bounds.extend({ lat: site.latitude, lng: site.longitude });
+      map.fitBounds(bounds);
+
       marker.addListener("click", () => {
-        const pushHistory = () => {
-          console.log("hi");
-          history.push(`/details/${site.id}`);
-          dispatch({ type: "SET_SITES", payload: [] });
-        };
         const infoWindowContent = (
           <div>
             <h5>{site.site_name}</h5>
@@ -73,9 +72,6 @@ const GoogleMap = () => {
         infoWindow.setPosition({ lat: site.latitude, lng: site.longitude });
         infoWindow.setContent(ReactDOMServer.renderToString(infoWindowContent));
         infoWindow.open({ map });
-        // google.maps.event.addListener(infoWindow, "domready", function (e) {
-        //   ReactDOM.render(infoWindowContent, infoWindow);
-        // });
       });
 
       return marker;
