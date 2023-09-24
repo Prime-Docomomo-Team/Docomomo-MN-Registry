@@ -7,6 +7,7 @@ import ReactDOMServer from "react-dom/server";
 import { Button, Box, Typography } from "@mui/material";
 import { ReactDOM } from "react";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import './GoogleMap.css'
 
 const GoogleMap = () => {
   const history = useHistory();
@@ -57,19 +58,20 @@ const GoogleMap = () => {
 
       marker.addListener("click", () => {
         const infoWindowContent = (
-          <div>
-            <h5>{site.site_name}</h5>
-            <p>
+          <div class='info-window-container'>
+            <h5 id='site-name'>{site.site_name}</h5>
+            <p id='site-address'>
               {site.street}, {site.city}, {site.state}, {site.zip}
             </p>
             {site.url_id != null && (
               <img
                 src={`https://drive.google.com/uc?export=view&id=${site.url_id}`}
                 style={{ height: 100, margin: "auto" }}
+                id='site-image'
               ></img>
             )}
 
-            <a href={`../#/details/${site.id}`}>Read More</a>
+            <a href={`../#/details/${site.id}`} id='details-link'>Read More</a>
           </div>
         );
 
