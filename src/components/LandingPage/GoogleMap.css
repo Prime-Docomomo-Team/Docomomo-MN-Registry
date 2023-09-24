@@ -1,0 +1,19 @@
+.info-window-container{
+    display: flex;
+    flex-direction: column;
+    font-family: 'Jost', sans-serif;
+    gap: 10px;
+}
+
+#details-link{
+    display: block;
+}
+#site-name{
+    margin: 0;
+    font-variant: small-caps;
+    font-size: 1.20rem;
+}
+
+#site-address{
+    margin: 0;
+}
