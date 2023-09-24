@@ -32,9 +32,12 @@ function EditToolbar(props) {
   const { setRows, setRowModesModel } = props;
 
   // For add column Modal
-  const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const [openAddColumn, setOpenAddColumn] = useState(false);
+  const [openRemoveColumn, setOpenRemoveColumn] = useState(false);
+  const handleOpenAddColumn = () => setOpenAddColumn(true);
+  const handleCloseAddColumn = () => setOpenAddColumn(false);
+  const handleOpenRemoveColumn = () => setOpenRemoveColumn(true);
+  const handleCloseRemoveColumn = () => setOpenRemoveColumn(false);
 
   const handleClick = () => {
     const id = Math.random() * 100000 + 300;
@@ -52,25 +55,29 @@ function EditToolbar(props) {
       </Button>
       {props.rowTitle === "Site" && (
         <>
-          <Button color="primary" startIcon={<AddIcon />} onClick={handleOpen}>
+          <Button
+            color="primary"
+            startIcon={<AddIcon />}
+            onClick={handleOpenAddColumn}
+          >
             Add Column
           </Button>
           <AddColumnModal
-            open={open}
-            handleOpen={handleOpen}
-            handleClose={handleClose}
+            open={openAddColumn}
+            handleOpen={handleOpenAddColumn}
+            handleClose={handleCloseAddColumn}
           />
           <Button
             color="secondary"
             startIcon={<RemoveIcon />}
-            onClick={handleOpen}
+            onClick={handleOpenRemoveColumn}
           >
             Remove Column
           </Button>
           <RemoveColumnModal
-            open={open}
-            handleOpen={handleOpen}
-            handleClose={handleClose}
+            open={openRemoveColumn}
+            handleOpen={handleOpenRemoveColumn}
+            handleClose={handleCloseRemoveColumn}
           />
         </>
       )}
