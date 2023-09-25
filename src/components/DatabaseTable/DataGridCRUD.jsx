@@ -40,8 +40,8 @@ function EditToolbar(props) {
   const handleCloseRemoveColumn = () => setOpenRemoveColumn(false);
 
   const handleClick = () => {
-    const id = Math.random() * 100000 + 300;
-    setRows((oldRows) => [...oldRows, { id, reward_title: "", isNew: true }]);
+    const id = Math.random() * -100000;
+    setRows((oldRows) => [{ id, isNew: true }, ...oldRows]);
     setRowModesModel((oldModel) => ({
       ...oldModel,
       [id]: { mode: GridRowModes.Edit, fieldToFocus: "name" },
