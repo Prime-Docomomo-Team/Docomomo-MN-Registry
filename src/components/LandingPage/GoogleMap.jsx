@@ -7,7 +7,7 @@ import ReactDOMServer from "react-dom/server";
 import { Button, Box, Typography } from "@mui/material";
 import { ReactDOM } from "react";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
-import './GoogleMap.css'
+import "./GoogleMap.css";
 
 const GoogleMap = () => {
   const history = useHistory();
@@ -48,40 +48,46 @@ const GoogleMap = () => {
     const infoWindow = new google.maps.InfoWindow();
     const bounds = new google.maps.LatLngBounds();
 
-    const markers = sites.map((site) => {
-      const marker = new google.maps.Marker({
-        position: { lat: site.latitude, lng: site.longitude },
+    const markers = sites
+      .filter((site) => site.latitude && site.longitude)
+      .map((site) => {
+        const marker = new google.maps.Marker({
+          position: { lat: site.latitude, lng: site.longitude },
+        });
+
+        bounds.extend({ lat: site.latitude, lng: site.longitude });
+        map.fitBounds(bounds);
+
+        marker.addListener("click", () => {
+          const infoWindowContent = (
+            <div class="info-window-container">
+              <h5 id="site-name">{site.site_name}</h5>
+              <p id="site-address">
+                {site.street}, {site.city}, {site.state}, {site.zip}
+              </p>
+              {site.url_id != null && (
+                <img
+                  src={`https://drive.google.com/uc?export=view&id=${site.url_id}`}
+                  style={{ height: 100, margin: "auto" }}
+                  id="site-image"
+                ></img>
+              )}
+
+              <a href={`../#/details/${site.id}`} id="details-link">
+                Read More
+              </a>
+            </div>
+          );
+
+          infoWindow.setPosition({ lat: site.latitude, lng: site.longitude });
+          infoWindow.setContent(
+            ReactDOMServer.renderToString(infoWindowContent)
+          );
+          infoWindow.open({ map });
+        });
+
+        return marker;
       });
-
-      bounds.extend({ lat: site.latitude, lng: site.longitude });
-      map.fitBounds(bounds);
-
-      marker.addListener("click", () => {
-        const infoWindowContent = (
-          <div class='info-window-container'>
-            <h5 id='site-name'>{site.site_name}</h5>
-            <p id='site-address'>
-              {site.street}, {site.city}, {site.state}, {site.zip}
-            </p>
-            {site.url_id != null && (
-              <img
-                src={`https://drive.google.com/uc?export=view&id=${site.url_id}`}
-                style={{ height: 100, margin: "auto" }}
-                id='site-image'
-              ></img>
-            )}
-
-            <a href={`../#/details/${site.id}`} id='details-link'>Read More</a>
-          </div>
-        );
-
-        infoWindow.setPosition({ lat: site.latitude, lng: site.longitude });
-        infoWindow.setContent(ReactDOMServer.renderToString(infoWindowContent));
-        infoWindow.open({ map });
-      });
-
-      return marker;
-    });
 
     const newMarkerCluster = new MarkerClusterer({
       markers,
@@ -105,21 +111,5 @@ const GoogleMap = () => {
     <div className="map-container"></div>
   );
 };
-
-// function addMarkers(map, sites) {
-//   const markers = sites.map((site) => {
-//     const marker = new google.maps.Marker({
-//       position: { lat: site.latitude, lng: site.longitude },
-//     });
-
-//     return marker;
-//   });
-
-//   new MarkerClusterer({
-//     markers,
-//     map,
-//     algorithm: new SuperClusterAlgorithm({ radius: 100 }),
-//   });
-// }
 
 export default GoogleMap;

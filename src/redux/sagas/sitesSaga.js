@@ -98,8 +98,10 @@ function* addSite(action) {
       );
       const geocode = yield geocodeResponse.json();
       console.log("georesponse", geocode);
-      payload.latitude = geocode.results[0].geometry.location.lat;
-      payload.longitude = geocode.results[0].geometry.location.lng;
+      if (geocode.results.length > 0) {
+        payload.latitude = geocode.results[0].geometry.location.lat;
+        payload.longitude = geocode.results[0].geometry.location.lng;
+      }
       console.log("geocode test", {
         lat: payload.latitude,
         lng: payload.longitude,
