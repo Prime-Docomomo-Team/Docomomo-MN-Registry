@@ -85,10 +85,29 @@ function* removeSitesColumn(action) {
 }
 
 function* addSite(action) {
+  const payload = action.payload;
   try {
+    if (!action.payload.latitude || !action.payload.longitude) {
+      const address =
+        `${payload.street} ${payload.city} ${payload.st} ${payload.zip}`.replace(
+          " ",
+          "%20"
+        );
+      const geocodeResponse = yield fetch(
+        `https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}`
+      );
+      const geocode = yield geocodeResponse.json();
+      console.log("georesponse", geocode);
+      payload.latitude = geocode.results[0].geometry.location.lat;
+      payload.longitude = geocode.results[0].geometry.location.lng;
+      console.log("geocode test", {
+        lat: payload.latitude,
+        lng: payload.longitude,
+      });
+    }
     const response = yield fetch("/api/sites", {
       method: "POST",
-      body: JSON.stringify(action.payload),
+      body: JSON.stringify(payload),
       headers: { "Content-Type": "application/json" },
     });
     if (!response.ok) {
