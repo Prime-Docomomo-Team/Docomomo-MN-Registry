@@ -1,19 +1,21 @@
-.info-window-container{
-    display: flex;
-    flex-direction: column;
-    font-family: 'Jost', sans-serif;
-    gap: 10px;
+.info-window-container {
+  display: flex;
+  flex-direction: column;
+  font-family: "Jost", sans-serif;
+  gap: 10px;
 }
 
-#details-link{
-    display: block;
+#details-link {
+  display: block;
+  text-decoration: none;
+  color: #f8642f;
 }
-#site-name{
-    margin: 0;
-    font-variant: small-caps;
-    font-size: 1.20rem;
+#site-name {
+  margin: 0;
+  font-variant: small-caps;
+  font-size: 1.2rem;
 }
 
-#site-address{
-    margin: 0;
+#site-address {
+  margin: 0;
 }
