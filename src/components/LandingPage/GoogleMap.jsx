@@ -60,7 +60,7 @@ const GoogleMap = () => {
 
         marker.addListener("click", () => {
           const infoWindowContent = (
-            <div class="info-window-container">
+            <div className="info-window-container">
               <h5 id="site-name">{site.site_name}</h5>
               <p id="site-address">
                 {site.street}, {site.city}, {site.state}, {site.zip}
