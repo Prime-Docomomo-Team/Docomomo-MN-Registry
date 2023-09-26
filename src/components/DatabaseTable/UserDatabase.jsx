@@ -33,12 +33,13 @@ const UserDatabase = () => {
       width: 120,
       editable: true,
     },
-    {
-      field: "password",
-      headerName: "Password",
-      width: 120,
-      editable: true,
-    },
+    // Decided it was unsecure to give admin access to all users passwords
+    // {
+    //   field: "password",
+    //   headerName: "Password",
+    //   width: 120,
+    //   editable: true,
+    // },
     {
       field: "admin",
       headerName: "Admin",
