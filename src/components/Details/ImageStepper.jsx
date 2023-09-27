@@ -29,7 +29,7 @@ function ImageStepper({ images }) {
   };
 
   return (
-    <Box sx={{ maxWidth: 400, flexGrow: 1, position: "relative" }}>
+    <Box sx={{ maxWidth: 550, flexGrow: 1, position: "relative" }}>
       <AutoPlaySwipeableViews
         axis={theme.direction === "rtl" ? "x-reverse" : "x"}
         index={activeStep}
@@ -42,9 +42,8 @@ function ImageStepper({ images }) {
               <Box
                 component="img"
                 sx={{
-                  height: 275,
+                  height: 325,
                   display: "block",
-                  maxWidth: 400,
                   overflow: "hidden",
                   width: "100%",
                 }}
