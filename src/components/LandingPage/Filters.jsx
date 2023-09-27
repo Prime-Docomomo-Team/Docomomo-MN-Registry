@@ -72,7 +72,7 @@ const Filters = () => {
                     select
                     key={column.ordinal_position}
                     label={column.column_name.replace("_", " ")}
-                    displayEmpty
+                    displayempty
                     // defaultValue={filterInputs[column.column_name] || ""}
                     onChange={(event) =>
                       dispatch({
