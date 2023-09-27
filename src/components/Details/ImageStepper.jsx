@@ -29,7 +29,16 @@ function ImageStepper({ images }) {
   };
 
   return (
-    <Box sx={{ maxWidth: 550, flexGrow: 1, position: "relative" }}>
+    <Box
+      sx={{
+        maxWidth: 550,
+        flexGrow: 1,
+        position: "relative",
+        display: "flex",
+        flexDirection: "column",
+        alignContent: "center",
+      }}
+    >
       <AutoPlaySwipeableViews
         axis={theme.direction === "rtl" ? "x-reverse" : "x"}
         index={activeStep}
@@ -37,21 +46,28 @@ function ImageStepper({ images }) {
         enableMouseEvents
       >
         {images.map((step, index) => (
-          <div key={step.label}>
+          <Box
+            key={step.label}
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+            }}
+          >
             {Math.abs(activeStep - index) <= 2 ? (
               <Box
                 component="img"
                 sx={{
-                  height: 325,
+                  height: "22em",
                   display: "block",
                   overflow: "hidden",
-                  width: "100%",
+                  objectFit: "cover",
                 }}
                 src={`https://drive.google.com/uc?export=view&id=${step.url_id}`}
                 alt={step.site_name}
               />
             ) : null}
-          </div>
+          </Box>
         ))}
       </AutoPlaySwipeableViews>
       <Typography
