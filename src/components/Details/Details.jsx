@@ -58,9 +58,9 @@ const Details = () => {
           display="flex"
           item
           xs={12}
-          sm={8}
-          md={6}
-          lg={5}
+          sm={11}
+          md={9}
+          lg={6}
           justifyContent="center"
           alignItems="center"
         >
