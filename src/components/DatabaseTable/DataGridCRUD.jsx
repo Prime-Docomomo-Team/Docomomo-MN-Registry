@@ -217,7 +217,7 @@ export default function FullFeaturedCrudGrid(props) {
     <Box
       sx={{
         mt: 1,
-        height: "auto",
+        height: "85vh",
         width: "100%",
         "& .actions": {
           color: "text.secondary",
