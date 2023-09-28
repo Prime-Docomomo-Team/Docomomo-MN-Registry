@@ -94,10 +94,32 @@ const GoogleMap = () => {
         return marker;
       });
 
+    const renderer = {
+      render: function ({ count, position }) {
+        return new google.maps.Marker({
+          label: {
+            text: count.toString(),
+            color: "#F8642F",
+            fontSize: "12px",
+            fontWeight: "bold",
+          },
+          position,
+          icon: {
+            url: require("../../images/cluster_images/m1.png"),
+            scaledSize: { width: 60, height: 60 },
+          },
+          title: "Zoom in to view resources in this area",
+          // adjust zIndex to be above other markers
+          zIndex: Number(google.maps.Marker.MAX_ZINDEX) + count,
+        });
+      },
+    };
+
     const newMarkerCluster = new MarkerClusterer({
       markers,
       map,
       algorithm: new SuperClusterAlgorithm({ radius: 100 }),
+      renderer: renderer,
     });
 
     setMarkerCluster(newMarkerCluster);
