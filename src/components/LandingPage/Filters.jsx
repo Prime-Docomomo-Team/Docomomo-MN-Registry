@@ -72,8 +72,8 @@ const Filters = () => {
                     select
                     key={column.ordinal_position}
                     label={column.column_name.replace("_", " ")}
-                    displayempty
-                    // defaultValue={filterInputs[column.column_name] || ""}
+                    // displayempty
+                    value={filterInputs[column.column_name] || ""}
                     onChange={(event) =>
                       dispatch({
                         type: "SET_FILTER_INPUTS",
