@@ -90,33 +90,46 @@ const GoogleMap = () => {
 
         return marker;
       });
+
+    var getGoogleClusterInlineSvg = function (color) {
+      var encoded = window.btoa(
+        '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="-100 -100 200 200"><defs><g id="a" transform="rotate(45)"><path d="M0 47A47 47 0 0 0 47 0L62 0A62 62 0 0 1 0 62Z" fill-opacity="0.7"/><path d="M0 67A67 67 0 0 0 67 0L81 0A81 81 0 0 1 0 81Z" fill-opacity="0.5"/><path d="M0 86A86 86 0 0 0 86 0L100 0A100 100 0 0 1 0 100Z" fill-opacity="0.3"/></g></defs><g fill="' +
+          color +
+          '"><circle r="42"/><use xlink:href="#a"/><g transform="rotate(120)"><use xlink:href="#a"/></g><g transform="rotate(240)"><use xlink:href="#a"/></g></g></svg>'
+      );
+
+      return "data:image/svg+xml;base64," + encoded;
+    };
     // Used to customize marker clusters if desired
-    // const renderer = {
-    //   render: function ({ count, position }) {
-    //     return new google.maps.Marker({
-    //       label: {
-    //         text: count.toString(),
-    //         color: "#F8642F",
-    //         fontSize: "12px",
-    //         fontWeight: "bold",
-    //       },
-    //       position,
-    //       icon: {
-    //         url: require("../../images/cluster_images/m1.png"),
-    //         scaledSize: { width: 60, height: 60 },
-    //       },
-    //       title: "Zoom in to view resources in this area",
-    //       // adjust zIndex to be above other markers
-    //       zIndex: Number(google.maps.Marker.MAX_ZINDEX) + count,
-    //     });
-    //   },
-    // };
+    const renderer = {
+      render: function ({ count, position }) {
+        return new google.maps.Marker({
+          label: {
+            text: count.toString(),
+            color: "white",
+            fontSize: "10px",
+            // fontWeight: "bold",
+          },
+          position,
+          icon: {
+            url:
+              count > 500
+                ? getGoogleClusterInlineSvg("#000")
+                : getGoogleClusterInlineSvg("orange"),
+            scaledSize: { width: 60, height: 60 },
+          },
+          title: "Zoom in to view resources in this area",
+          // adjust zIndex to be above other markers
+          zIndex: Number(google.maps.Marker.MAX_ZINDEX) + count,
+        });
+      },
+    };
 
     const newMarkerCluster = new MarkerClusterer({
       markers,
       map,
       algorithm: new SuperClusterAlgorithm({ radius: 100 }),
-      // renderer: renderer,
+      renderer: renderer,
     });
 
     setMarkerCluster(newMarkerCluster);
