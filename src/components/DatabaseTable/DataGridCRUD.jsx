@@ -38,9 +38,13 @@ function EditToolbar(props) {
   const handleCloseAddColumn = () => setOpenAddColumn(false);
   const handleOpenRemoveColumn = () => setOpenRemoveColumn(true);
   const handleCloseRemoveColumn = () => setOpenRemoveColumn(false);
+  // For new ID
+  const [newRowNum, setNewRowNum] = useState(0);
 
   const handleClick = () => {
-    const id = Math.random() * -100000;
+    // const id = Math.random() * -100000;
+    const id = newRowNum ? `new_${newRowNum}` : "new";
+    setNewRowNum(newRowNum + 1);
     setRows((oldRows) => [{ id, isNew: true }, ...oldRows]);
     setRowModesModel((oldModel) => ({
       ...oldModel,
