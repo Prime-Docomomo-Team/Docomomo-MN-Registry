@@ -4,11 +4,8 @@ import { GoogleMapProvider } from "@ubilabs/google-maps-react-hooks";
 import { MarkerClusterer } from "@googlemaps/markerclusterer";
 import SuperClusterAlgorithm from "./superClusterAlgorithm";
 import ReactDOMServer from "react-dom/server";
-import { Button, Box, Typography } from "@mui/material";
-import { ReactDOM } from "react";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import "./GoogleMap.css";
-import markerIcon from "../../images/docomomoStyle.png";
 
 const GoogleMap = () => {
   const history = useHistory();
@@ -55,7 +52,7 @@ const GoogleMap = () => {
         const marker = new google.maps.Marker({
           position: { lat: site.latitude, lng: site.longitude },
           icon: {
-            url: require("../../images/marker-blue.png"),
+            url: require("../../images/marker-orange-alt.png"),
             scaledSize: { width: 40, height: 40 },
           },
         });
