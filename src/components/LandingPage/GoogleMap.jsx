@@ -103,6 +103,25 @@ const GoogleMap = () => {
     // Used to customize marker clusters if desired
     const renderer = {
       render: function ({ count, position }) {
+        let icon;
+        if (count < 100) {
+          icon = {
+            url: getGoogleClusterInlineSvg("#2592d9"),
+            scaledSize: { width: 40, height: 40 },
+          };
+        }
+        if (count > 100 && count < 1000) {
+          icon = {
+            url: getGoogleClusterInlineSvg("#2abfba"),
+            scaledSize: { width: 50, height: 50 },
+          };
+        }
+        if (count > 1000) {
+          icon = {
+            url: getGoogleClusterInlineSvg("#F8642F"),
+            scaledSize: { width: 60, height: 60 },
+          };
+        }
         return new google.maps.Marker({
           label: {
             text: count.toString(),
@@ -111,13 +130,7 @@ const GoogleMap = () => {
             // fontWeight: "bold",
           },
           position,
-          icon: {
-            url:
-              count > 500
-                ? getGoogleClusterInlineSvg("#000")
-                : getGoogleClusterInlineSvg("orange"),
-            scaledSize: { width: 60, height: 60 },
-          },
+          icon,
           title: "Zoom in to view resources in this area",
           // adjust zIndex to be above other markers
           zIndex: Number(google.maps.Marker.MAX_ZINDEX) + count,
