@@ -8,6 +8,12 @@ import docomomoLogo from "../../images/docomomoLogo.png";
 function Nav() {
   const user = useSelector((store) => store.user);
   const history = useHistory();
+  const [database, setDatabase] = useState('');
+
+  const handleSelect = (event) => {
+    console.log('Event target value', event.target.value);
+    history.push(`/${event.target.value}`);
+  };
 
   return (
     <AppBar position="static" sx={{ boxShadow: 0 }}>
@@ -38,8 +44,9 @@ function Nav() {
               <FormControl fullWidth sx={{color: 'white'}}>
                 <InputLabel sx={{color: 'white'}} >Database</InputLabel>
                 <Select
+                  
                   label="Database"
-                  onChange={(event)=>history.push(`/${event.target.value}`)}
+                  onChange={handleSelect}
                 >
                   <MenuItem value='sites-database'>Sites Database</MenuItem>
                   <MenuItem value='site-photos-database'>Photos Database</MenuItem>
