@@ -8,6 +8,7 @@ import { Button, Box, Typography } from "@mui/material";
 import { ReactDOM } from "react";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import "./GoogleMap.css";
+import markerIcon from "../../images/docomomoStyle.png";
 
 const GoogleMap = () => {
   const history = useHistory();
@@ -53,6 +54,10 @@ const GoogleMap = () => {
       .map((site) => {
         const marker = new google.maps.Marker({
           position: { lat: site.latitude, lng: site.longitude },
+          icon: {
+            url: require("../../images/docomomoStyle.png"),
+            scaledSize: { width: 32, height: 32 },
+          },
         });
 
         bounds.extend({ lat: site.latitude, lng: site.longitude });
