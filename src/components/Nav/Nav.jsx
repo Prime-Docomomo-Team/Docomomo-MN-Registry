@@ -2,7 +2,16 @@ import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import LogOutButton from "../LogOutButton/LogOutButton";
 import { useSelector } from "react-redux";
-import { AppBar, Toolbar, Box, Button, FormControl, InputLabel, Select, MenuItem } from "@mui/material";
+import {
+  AppBar,
+  Toolbar,
+  Box,
+  Button,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+} from "@mui/material";
 import docomomoLogo from "../../images/docomomoLogo.png";
 
 function Nav() {
@@ -16,13 +25,13 @@ function Nav() {
           <Box
             component="img"
             src={docomomoLogo}
-            height='2rem'
+            height="2rem"
             alt="docomomo MN US logo"
             sx={{ margin: 2, marginLeft: 0 }}
             onClick={history.push("/home")}
           ></Box>
         </Link>
-        <Box display='flex' gap={1} margin={1.5}>
+        <Box display="flex" gap={1} margin={1.5}>
           {/* If no user is logged in, show these links */}
           {!user.id && (
             // If there's no user, show login/registration links
@@ -34,16 +43,31 @@ function Nav() {
 
           {/* If a user is an admin, show the sites database button */}
           {user.admin && (
-            <Box sx={{ minWidth: 120  }}>
-              <FormControl fullWidth sx={{color: 'white'}}>
-                <InputLabel sx={{color: 'white'}} >Database</InputLabel>
-                <Select
-                  label="Database"
-                  onChange={(event)=>history.push(`/${event.target.value}`)}
-                >
-                  <MenuItem value='sites-database'>Sites Database</MenuItem>
-                  <MenuItem value='site-photos-database'>Photos Database</MenuItem>
-                  <MenuItem value='user-database'>User Database</MenuItem>
+            <Box sx={{ minWidth: 120 }}>
+              <FormControl fullWidth sx={{ color: "white" }}>
+                <InputLabel sx={{ color: "white" }}>Database</InputLabel>
+                <Select label="Database">
+                  <MenuItem
+                    value="sites-database"
+                    component={Link}
+                    to="/sites-database"
+                  >
+                    Sites Database
+                  </MenuItem>
+                  <MenuItem
+                    value="site-photos-database"
+                    component={Link}
+                    to="/site-photos-database"
+                  >
+                    Photos Database
+                  </MenuItem>
+                  <MenuItem
+                    value="user-database"
+                    component={Link}
+                    to="/user-database"
+                  >
+                    User Database
+                  </MenuItem>
                 </Select>
               </FormControl>
             </Box>
