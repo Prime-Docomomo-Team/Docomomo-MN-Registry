@@ -55,8 +55,8 @@ const GoogleMap = () => {
         const marker = new google.maps.Marker({
           position: { lat: site.latitude, lng: site.longitude },
           icon: {
-            url: require("../../images/docomomoStyle.png"),
-            scaledSize: { width: 32, height: 32 },
+            url: require("../../images/marker-blue.png"),
+            scaledSize: { width: 40, height: 40 },
           },
         });
 
@@ -93,33 +93,33 @@ const GoogleMap = () => {
 
         return marker;
       });
-
-    const renderer = {
-      render: function ({ count, position }) {
-        return new google.maps.Marker({
-          label: {
-            text: count.toString(),
-            color: "#F8642F",
-            fontSize: "12px",
-            fontWeight: "bold",
-          },
-          position,
-          icon: {
-            url: require("../../images/cluster_images/m1.png"),
-            scaledSize: { width: 60, height: 60 },
-          },
-          title: "Zoom in to view resources in this area",
-          // adjust zIndex to be above other markers
-          zIndex: Number(google.maps.Marker.MAX_ZINDEX) + count,
-        });
-      },
-    };
+    // Used to customize marker clusters if desired
+    // const renderer = {
+    //   render: function ({ count, position }) {
+    //     return new google.maps.Marker({
+    //       label: {
+    //         text: count.toString(),
+    //         color: "#F8642F",
+    //         fontSize: "12px",
+    //         fontWeight: "bold",
+    //       },
+    //       position,
+    //       icon: {
+    //         url: require("../../images/cluster_images/m1.png"),
+    //         scaledSize: { width: 60, height: 60 },
+    //       },
+    //       title: "Zoom in to view resources in this area",
+    //       // adjust zIndex to be above other markers
+    //       zIndex: Number(google.maps.Marker.MAX_ZINDEX) + count,
+    //     });
+    //   },
+    // };
 
     const newMarkerCluster = new MarkerClusterer({
       markers,
       map,
       algorithm: new SuperClusterAlgorithm({ radius: 100 }),
-      renderer: renderer,
+      // renderer: renderer,
     });
 
     setMarkerCluster(newMarkerCluster);
