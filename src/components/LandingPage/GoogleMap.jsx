@@ -147,13 +147,13 @@ const GoogleMap = () => {
             scaledSize: { width: 40, height: 40 },
           };
         }
-        if (count > 100 && count < 1000) {
+        if (count >= 100 && count < 1000) {
           icon = {
             url: getGoogleClusterInlineSvg("#d97706"),
             scaledSize: { width: 50, height: 50 },
           };
         }
-        if (count > 1000) {
+        if (count >= 1000) {
           icon = {
             url: getGoogleClusterInlineSvg("#b91c1c"),
             scaledSize: { width: 60, height: 60 },
@@ -168,7 +168,7 @@ const GoogleMap = () => {
           },
           position,
           icon,
-          title: "Zoom in to view resources in this area",
+          title: "Zoom in to view sites in this area",
           // adjust zIndex to be above other markers
           zIndex: Number(google.maps.Marker.MAX_ZINDEX) + count,
         });
