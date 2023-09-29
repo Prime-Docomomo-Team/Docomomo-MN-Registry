@@ -97,8 +97,8 @@ const GoogleMap = () => {
         // change color if this cluster has more markers than the mean cluster
         const color =
           count > Math.max(10, stats.clusters.markers.mean)
-            ? "#e76f51"
-            : "#2a9d8f";
+            ? "#db431d"
+            : "#1c7167";
 
         // create svg url with fill color
         const svg = window.btoa(`
@@ -142,19 +142,19 @@ const GoogleMap = () => {
         let icon;
         if (count < 100) {
           icon = {
-            url: getGoogleClusterInlineSvg("#2a9d8f"),
+            url: getGoogleClusterInlineSvg("#065f46"),
             scaledSize: { width: 40, height: 40 },
           };
         }
         if (count > 100 && count < 1000) {
           icon = {
-            url: getGoogleClusterInlineSvg("#f4a261"),
+            url: getGoogleClusterInlineSvg("#d97706"),
             scaledSize: { width: 50, height: 50 },
           };
         }
         if (count > 1000) {
           icon = {
-            url: getGoogleClusterInlineSvg("#e76f51"),
+            url: getGoogleClusterInlineSvg("#b91c1c"),
             scaledSize: { width: 60, height: 60 },
           };
         }
@@ -178,7 +178,7 @@ const GoogleMap = () => {
       markers,
       map,
       algorithm: new SuperClusterAlgorithm({ radius: 100 }),
-      // renderer: renderer,
+      renderer: renderer,
     });
 
     setMarkerCluster(newMarkerCluster);
