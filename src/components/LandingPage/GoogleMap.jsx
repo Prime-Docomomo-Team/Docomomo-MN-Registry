@@ -91,6 +91,42 @@ const GoogleMap = () => {
         return marker;
       });
 
+    // Used to customize marker clusters if desired
+    const rendererDefault = {
+      render: function ({ count, position }, stats) {
+        // change color if this cluster has more markers than the mean cluster
+        const color =
+          count > Math.max(10, stats.clusters.markers.mean)
+            ? "#e76f51"
+            : "#2a9d8f";
+
+        // create svg url with fill color
+        const svg = window.btoa(`
+<svg fill="${color}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240">
+  <circle cx="120" cy="120" opacity=".6" r="70" />
+  <circle cx="120" cy="120" opacity=".3" r="90" />
+  <circle cx="120" cy="120" opacity=".2" r="110" />
+  <circle cx="120" cy="120" opacity=".1" r="130" />
+</svg>`);
+
+        // create marker using svg icon
+        return new google.maps.Marker({
+          position,
+          icon: {
+            url: `data:image/svg+xml;base64,${svg}`,
+            scaledSize: new google.maps.Size(50, 50),
+          },
+          label: {
+            text: String(count),
+            color: "rgba(255,255,255,0.9)",
+            fontSize: "10px",
+          },
+          // adjust zIndex to be above other markers
+          zIndex: 1000 + count,
+        });
+      },
+    };
+
     var getGoogleClusterInlineSvg = function (color) {
       var encoded = window.btoa(
         '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="-100 -100 200 200"><defs><g id="a" transform="rotate(45)"><path d="M0 47A47 47 0 0 0 47 0L62 0A62 62 0 0 1 0 62Z" fill-opacity="0.7"/><path d="M0 67A67 67 0 0 0 67 0L81 0A81 81 0 0 1 0 81Z" fill-opacity="0.5"/><path d="M0 86A86 86 0 0 0 86 0L100 0A100 100 0 0 1 0 100Z" fill-opacity="0.3"/></g></defs><g fill="' +
@@ -106,19 +142,19 @@ const GoogleMap = () => {
         let icon;
         if (count < 100) {
           icon = {
-            url: getGoogleClusterInlineSvg("#2592d9"),
+            url: getGoogleClusterInlineSvg("#2a9d8f"),
             scaledSize: { width: 40, height: 40 },
           };
         }
         if (count > 100 && count < 1000) {
           icon = {
-            url: getGoogleClusterInlineSvg("#2abfba"),
+            url: getGoogleClusterInlineSvg("#f4a261"),
             scaledSize: { width: 50, height: 50 },
           };
         }
         if (count > 1000) {
           icon = {
-            url: getGoogleClusterInlineSvg("#F8642F"),
+            url: getGoogleClusterInlineSvg("#e76f51"),
             scaledSize: { width: 60, height: 60 },
           };
         }
@@ -126,7 +162,7 @@ const GoogleMap = () => {
           label: {
             text: count.toString(),
             color: "white",
-            fontSize: "10px",
+            fontSize: "11px",
             // fontWeight: "bold",
           },
           position,
@@ -142,7 +178,7 @@ const GoogleMap = () => {
       markers,
       map,
       algorithm: new SuperClusterAlgorithm({ radius: 100 }),
-      renderer: renderer,
+      // renderer: renderer,
     });
 
     setMarkerCluster(newMarkerCluster);
