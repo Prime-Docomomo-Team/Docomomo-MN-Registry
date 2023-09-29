@@ -42,7 +42,7 @@ function App() {
       secondary: {
         main: "#D4D4D4",
         light: "#F2F2F2",
-        dark: "#7B89996",
+        dark: "#7B8996",
       },
     },
     typography: {
