@@ -98,8 +98,8 @@ const GoogleMap = () => {
         // change color if this cluster has more markers than the mean cluster
         const color =
           count > Math.max(10, stats.clusters.markers.mean)
-            ? "#db431d"
-            : "#1c7167";
+            ? "#b91c1c"
+            : "#065f46";
 
         // create svg url with fill color
         const svg = window.btoa(`
@@ -127,12 +127,89 @@ const GoogleMap = () => {
         });
       },
     };
+    const rendererDefault3Color = {
+      render: function ({ count, position }, stats) {
+        // change color if this cluster has more markers than the mean cluster
+        const color =
+          count >= 1000
+            ? "#b91c1c"
+            : count < 1000 && count >= 100
+            ? "#d97706"
+            : "#065f46";
+
+        // create svg url with fill color
+        const svg = window.btoa(`
+<svg fill="${color}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240">
+  <circle cx="120" cy="120" opacity=".6" r="70" />
+  <circle cx="120" cy="120" opacity=".3" r="90" />
+  <circle cx="120" cy="120" opacity=".2" r="110" />
+  <circle cx="120" cy="120" opacity=".1" r="130" />
+</svg>`);
+
+        // create marker using svg icon
+        return new google.maps.Marker({
+          position,
+          icon: {
+            url: `data:image/svg+xml;base64,${svg}`,
+            scaledSize: new google.maps.Size(50, 50),
+          },
+          label: {
+            text: String(count),
+            color: "rgba(255,255,255,0.9)",
+            fontSize: "10px",
+          },
+          // adjust zIndex to be above other markers
+          zIndex: 1000 + count,
+        });
+      },
+    };
+    const rendererDefault3Size = {
+      render: function ({ count, position }, stats) {
+        // change color if this cluster has more markers than the mean cluster
+        const color =
+          count >= 1000
+            ? "#b91c1c"
+            : count < 1000 && count >= 100
+            ? "#d97706"
+            : "#065f46";
+
+        // create svg url with fill color
+        const svg = window.btoa(`
+<svg fill="${color}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240">
+  <circle cx="120" cy="120" opacity=".6" r="70" />
+  <circle cx="120" cy="120" opacity=".3" r="90" />
+  <circle cx="120" cy="120" opacity=".2" r="110" />
+  <circle cx="120" cy="120" opacity=".1" r="130" />
+</svg>`);
+
+        // create marker using svg icon
+        return new google.maps.Marker({
+          position,
+          icon: {
+            url: `data:image/svg+xml;base64,${svg}`,
+            scaledSize:
+              count >= 1000
+                ? new google.maps.Size(55, 55)
+                : count < 1000 && count >= 100
+                ? new google.maps.Size(48, 48)
+                : new google.maps.Size(39, 39),
+          },
+          label: {
+            text: String(count),
+            color: "rgba(255,255,255,0.9)",
+            fontSize: "10px",
+          },
+          // adjust zIndex to be above other markers
+          zIndex: 1000 + count,
+        });
+      },
+    };
 
     var getGoogleClusterInlineSvg = function (color) {
       var encoded = window.btoa(
         '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="-100 -100 200 200"><defs><g id="a" transform="rotate(45)"><path d="M0 47A47 47 0 0 0 47 0L62 0A62 62 0 0 1 0 62Z" fill-opacity="0.7"/><path d="M0 67A67 67 0 0 0 67 0L81 0A81 81 0 0 1 0 81Z" fill-opacity="0.5"/><path d="M0 86A86 86 0 0 0 86 0L100 0A100 100 0 0 1 0 100Z" fill-opacity="0.3"/></g></defs><g fill="' +
           color +
-          '"><circle r="42"/><use xlink:href="#a"/><g transform="rotate(120)"><use xlink:href="#a"/></g><g transform="rotate(240)"><use xlink:href="#a"/></g></g></svg>'
+          '"><circle r="42" opacity="0.9"/><use xlink:href="#a"/><g transform="rotate(120)"><use xlink:href="#a"/></g><g transform="rotate(240)"><use xlink:href="#a"/></g></g></svg>'
       );
 
       return "data:image/svg+xml;base64," + encoded;
@@ -179,7 +256,7 @@ const GoogleMap = () => {
       markers,
       map,
       algorithm: new SuperClusterAlgorithm({ radius: 100 }),
-      renderer: renderer,
+      renderer: rendererDefault3Size,
     });
 
     setMarkerCluster(newMarkerCluster);
