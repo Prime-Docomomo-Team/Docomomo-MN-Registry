@@ -6,7 +6,7 @@ function LogOutButton(props) {
   const dispatch = useDispatch();
   return (
     <Button
-      sx={{ color: "#FFFFFF" }}
+      sx={{ color: "#242424" }}
       onClick={() => dispatch({ type: "LOGOUT" })}
     >
       Logout

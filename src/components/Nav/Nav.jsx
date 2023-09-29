@@ -19,7 +19,7 @@ function Nav() {
   const history = useHistory();
 
   return (
-    <AppBar position="static" sx={{ boxShadow: 0 }}>
+    <AppBar position="static" sx={{ boxShadow: 0, bgcolor: "secondary.light" }}>
       <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
         <Link to="/home">
           <Box
@@ -37,7 +37,7 @@ function Nav() {
             // If there's no user, show login/registration links
 
             <Link to="/login">
-              <Button sx={{ color: "#FFFFFF" }}>Login</Button>
+              <Button sx={{ color: "primary.main" }}>Login</Button>
             </Link>
           )}
 
@@ -45,7 +45,7 @@ function Nav() {
           {user.admin && (
             <Box sx={{ minWidth: 120 }}>
               <FormControl fullWidth sx={{ color: "white" }}>
-                <InputLabel sx={{ color: "white" }}>Database</InputLabel>
+                <InputLabel sx={{ color: "primary.main" }}>Database</InputLabel>
                 <Select label="Database">
                   <MenuItem
                     value="sites-database"
