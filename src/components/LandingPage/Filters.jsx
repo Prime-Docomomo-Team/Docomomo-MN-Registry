@@ -67,7 +67,8 @@ const Filters = () => {
               return (
                 <Grid item xs={3} key={column.column_name}>
                   <TextField
-                    fullWidth
+                    // fullWidth
+                    sx={{ width: "100%", maxWidth: "9.4rem" }}
                     variant="standard"
                     select
                     key={column.ordinal_position}
