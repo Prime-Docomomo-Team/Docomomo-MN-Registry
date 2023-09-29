@@ -52,8 +52,9 @@ const GoogleMap = () => {
         const marker = new google.maps.Marker({
           position: { lat: site.latitude, lng: site.longitude },
           icon: {
-            url: require("../../images/marker-red.png"),
-            scaledSize: { width: 35, height: 35 },
+            url: require("../../images/marker-simple-transparent.png"),
+            // scaledSize: { width: 35, height: 35 },
+            scaledSize: { width: 30, height: 30 },
           },
         });
 
