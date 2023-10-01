@@ -73,7 +73,7 @@ function ImageStepper({ images }) {
       <Typography
         sx={{
           position: "absolute",
-          bottom: 45,
+          bottom: images.length > 1 ? 45 : 2,
           right: 4,
           color: "secondary.main",
         }}
