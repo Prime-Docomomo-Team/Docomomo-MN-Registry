@@ -8,6 +8,18 @@ Docomomo MN's Minnesota Modern Registry documents the wide array of buildings, s
 * Individual pages for each site with details
 * Login allows administrators to edit, add, and delete sites from database
 
+[Live Deployed Site](https://docomomo-mn-modern-registry-28e0f754dd03.herokuapp.com/#/home)
+
+## Screenshots
+
+### Landing Page
+![Screenshot of the homepage of the Docomomo MN/US modern registry map](./screenshots/screenshot-1.png "Screenshot of the homepage of the Docomomo MN/US modern registry map")
+
+### Info Window 
+![Screenshot of an info window popup on the Docomomo MN/US modern registry map](./screenshots/screenshot-2.png "Screenshot of an info window popup on the Docomomo MN/US modern registry map")
+
+### Details Page
+![Screenshot of a site details page on the Docomomo MN/US modern registry map](./screenshots/screenshot-3.png "Screenshot of a site details page on the Docomomo MN/US modern registry map")
 
 ## Getting Started
 
@@ -47,21 +59,28 @@ Before you get started, make sure you have the following software installed on y
 1. Add an environment variable for `REACT_APP_GOOGLE_MAPS_API_KEY` with your Google Maps API key
 1. In the deploy section, select manual deploy
 
-
 ## Built With
 
+* [Node.js](https://nodejs.org/en/)
+* [Express](https://expressjs.com/)
 * [React](https://react.dev/)
-* 
+* [Redux](https://redux.js.org/)
+* [Material UI](https://mui.com/)
+* [Postgres](https://www.postgresql.org/)
+* [Google Maps API](https://developers.google.com/maps/documentation/javascript)
 
 ## Authors
 
 * **Prime Digital Academy** - *Starter Repo* - [Prime Digital Academy](https://www.primeacademy.io/)
-
-
+* **Daniel Davidson** - [Github Profile](https://github.com/dmrd2653)
+* **Luke Gartner** - [Github Profile](https://github.com/lukegartner)
+* **Javier Navarro** - [Gibhub Profile](https://github.com/Javierna182)
+* **Maya Peters** - [Github Profile](https://github.com/mayaavida)
+* **Jose Sanchez** - [Gibhut Profile](https://github.com/Astronaut)
 
 ## Acknowledgments
 
-* Hat tip to anyone whose code was used
-* Inspiration
-* etc
+* Thank you to [Prime Digital Academy](https://www.primeacademy.io/) whose starter repo we used!
+* Thank you to our instructors, Zac Delventhal, Chris Black, and Peter DeMaio
+* Thank you to the rest of our Topaz cohort!!
 
