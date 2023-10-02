@@ -24,7 +24,7 @@ Before you get started, make sure you have the following software installed on y
 
 ### Installing
 
-* Fork or Clone this repository and pull it down to your computer. 
+* First, make a fork or template of this repository and clone it down to your machine
 * Run `npm install`
 * Create a `.env` file at the root of the project and add the following variables:
 ```
