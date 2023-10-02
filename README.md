@@ -1,3 +1,98 @@
+# Docomomo MN / US Modern Registry Map
+
+Docomomo MN's Minnesota Modern Registry documents the wide array of buildings, sites, and neighborhoods of the modern movement in the state of Minnesota. Our team from Prime Digital Academy upgraded the initial version of the map with the following: 
+
+* Responsive design that is mobile friendly
+* Clustering of sites allows for easier navigation and reduced delay on map load
+* Dynamic map filters, searches, site details page, and SQL queries allowing for an expandable database
+* Individual pages for each site with details
+* Login allows administrators to edit, add, and delete sites from database
+
+
+## Getting Started
+
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
+
+### Prerequisites
+
+Before you get started, make sure you have the following software installed on your computer:
+
+- [Node.js](https://nodejs.org/en/)
+- [PostrgeSQL](https://www.postgresql.org/)
+- [Nodemon](https://nodemon.io/)
+
+### Installing
+
+* - Fork or Clone this repository and pull it down to your computer. 
+- Run `npm install`
+- Create a `.env` file at the root of the project and add the following variables:
+```
+  SERVER_SESSION_SECRET= insert a randomly generated strong password
+  REACT_APP_GOOGLE_MAPS_API_KEY= you will need to set up a [Google Maps Platform account](https://console.cloud.google.com/google/maps-apis/start?utm_source=Docs_GS_Button&ref=https://developers.google.com/maps/&utm_content=Docs_Central) and paste in your own API key here 
+```
+* - Set up your databases using the statements in the database folder
+* - Start postgres if not running
+- Run `npm run server`
+- Run `npm run client`
+
+
+End with an example of getting some data out of the system or using it for a little demo
+
+## Running the tests
+
+Explain how to run the automated tests for this system
+
+### Break down into end to end tests
+
+Explain what these tests test and why
+
+```
+Give an example
+```
+
+### And coding style tests
+
+Explain what these tests test and why
+
+```
+Give an example
+```
+
+## Deployment
+
+Add additional notes about how to deploy this on a live system
+
+## Built With
+
+* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
+* [Maven](https://maven.apache.org/) - Dependency Management
+* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
+
+## Contributing
+
+Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
+
+## Versioning
+
+We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
+
+## Authors
+
+* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
+
+See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+
+## Acknowledgments
+
+* Hat tip to anyone whose code was used
+* Inspiration
+* etc
+
+
 
 # Prime Solo Project Starting Repo
 This version uses React, Redux, Express, Passport, and PostgreSQL (a full list of dependencies can be found in `package.json`).
